@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitMqConfig {
 
     //todo test line to make sure the branching in git is working
+    //todo another test line
     public static final String TEST_QUEUE = "test-queue";
     public static final String TEST_EXCHANGE  ="test_exchange";
     public static final String TEST_ROUTE = "test-route";
