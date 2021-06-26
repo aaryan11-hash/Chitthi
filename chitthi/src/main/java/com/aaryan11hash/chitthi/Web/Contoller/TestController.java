@@ -19,9 +19,21 @@ public class TestController {
     @Autowired
     RabbitTemplate template;
 
-    @PostMapping("/check")
-    public Mono<ResponseEntity<String>> sendTestResponse(){
-        template.convertAndSend(RabbitMqConfig.TEST_EXCHANGE,RabbitMqConfig.TEST_ROUTE,TestMessage.builder().testName("test").build());
+    @PostMapping("/check1")
+    public Mono<ResponseEntity<String>> sendTestResponse1(){
+        template.convertAndSend(RabbitMqConfig.TEST_EXCHANGE,RabbitMqConfig.TEST_ROUTE1,TestMessage.builder().testName("test1").build());
+        return Mono.just(ResponseEntity.ok().body("DONE"));
+    }
+
+    @PostMapping("/check2")
+    public Mono<ResponseEntity<String>> sendTestResponse2(){
+        template.convertAndSend(RabbitMqConfig.TEST_EXCHANGE,RabbitMqConfig.TEST_ROUTE2,TestMessage.builder().testName("test2").build());
+        return Mono.just(ResponseEntity.ok().body("DONE"));
+    }
+
+    @PostMapping("/check3")
+    public Mono<ResponseEntity<String>> sendTestResponse3(){
+        template.convertAndSend(RabbitMqConfig.TEST_EXCHANGE,RabbitMqConfig.TEST_ROUTE3,TestMessage.builder().testName("test3").build());
         return Mono.just(ResponseEntity.ok().body("DONE"));
     }
 }
