@@ -13,33 +13,68 @@ public class RabbitMqConfig {
 
     //todo test line to make sure the branching in git is working
     //todo another test line
-    public static final String TEST_QUEUE = "test-queue";
+    public static final String TEST_QUEUE1 = "test-queue1";
+    public static final String TEST_QUEUE2 = "test-queue2";
+    public static final String TEST_QUEUE3 = "test-queue3";
     public static final String TEST_EXCHANGE  ="test_exchange";
-    public static final String TEST_ROUTE = "test-route";
+    public static final String TEST_ROUTE1 = "test-route1";
+    public static final String TEST_ROUTE2 = "test-route2";
+    public static final String TEST_ROUTE3 = "test-route3";
 
     @Bean
-    public Queue queue(){
-        return new Queue(TEST_QUEUE);
+    public Queue queue1(){
+        return new Queue(TEST_QUEUE1);
     }
 
     @Bean
-    public TopicExchange topicExchange(){
+    public Queue queue2(){
+        return new Queue(TEST_QUEUE2);
+    }
+
+    @Bean
+    public Queue queue3(){
+        return new Queue(TEST_QUEUE3);
+    }
+
+    @Bean
+    public TopicExchange topicExchangeTest1(){
         return new TopicExchange(TEST_EXCHANGE);
     }
 
+
+
     @Bean
-    public Binding binding(Queue queue,TopicExchange topicExchange){
+    public Binding bindingtest1(Queue queue1,TopicExchange topicExchange){
 
         return BindingBuilder
-                .bind(queue)
+                .bind(queue1)
                 .to(topicExchange)
-                .with(TEST_ROUTE);
+                .with(TEST_ROUTE1);
+    }
+
+    @Bean
+    public Binding bindingtest2(Queue queue2,TopicExchange topicExchange){
+
+        return BindingBuilder
+                .bind(queue2)
+                .to(topicExchange)
+                .with(TEST_ROUTE2);
+    }
+
+    @Bean
+    public Binding bindingtest3(Queue queue3,TopicExchange topicExchange){
+
+        return BindingBuilder
+                .bind(queue3)
+                .to(topicExchange)
+                .with(TEST_ROUTE3);
     }
 
     @Bean
     public MessageConverter messageConverter(){
         return new Jackson2JsonMessageConverter();
     }
+
 
     @Bean
     public AmqpTemplate template(ConnectionFactory connectionFactory){
