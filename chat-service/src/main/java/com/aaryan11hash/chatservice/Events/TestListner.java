@@ -1,6 +1,7 @@
-package com.aaryan11hash.chitthi.Events;
+package com.aaryan11hash.chatservice.Events;
 
-import com.aaryan11hash.chitthi.Config.RabbitMqConfig;
+import com.aaryan11hash.chatservice.Config.RabbitMqConfig;
+import com.aaryan11hash.chatservice.Events.Models.TestMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;

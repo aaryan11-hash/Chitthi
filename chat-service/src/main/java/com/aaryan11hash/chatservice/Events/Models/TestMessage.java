@@ -1,4 +1,4 @@
-package com.aaryan11hash.chitthi.Events;
+package com.aaryan11hash.chatservice.Events.Models;
 
 import lombok.*;
 
