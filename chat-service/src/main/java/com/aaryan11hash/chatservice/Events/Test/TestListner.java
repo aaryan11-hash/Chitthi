@@ -1,4 +1,4 @@
-package com.aaryan11hash.chatservice.Events;
+package com.aaryan11hash.chatservice.Events.Test;
 
 import com.aaryan11hash.chatservice.Config.RabbitMqConfig;
 import com.aaryan11hash.chatservice.Events.Models.TestMessage;
