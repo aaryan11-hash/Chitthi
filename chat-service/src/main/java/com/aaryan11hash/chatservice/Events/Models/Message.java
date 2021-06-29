@@ -1,5 +1,12 @@
 package com.aaryan11hash.chatservice.Events.Models;
 
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
+@Builder
+@Getter
+@Setter
 public class Message {
 
     private String data;
@@ -12,6 +19,8 @@ public class Message {
 
     public Message() {
     }
+
+
 
     public String getData() {
         return data;
