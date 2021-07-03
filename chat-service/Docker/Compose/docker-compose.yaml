@@ -1,0 +1,41 @@
+version: "3.8"
+services:
+  redisserver:
+    image: redis
+    container_name: rashish
+    ports:
+      - 6379:6379
+
+  rabbitmq:
+    image: jorgeacetozi/rabbitmq-stomp:3.6
+    container_name: rabbitmq-stomp2
+    ports:
+      - 5672:5672
+      - 15672:15672
+      - 61613:61613
+
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    ports:
+      - 27017:27017
+    volumes:
+      - data:/data
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=rootuser
+      - MONGO_INITDB_ROOT_PASSWORD=rootpass
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=rootuser
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=rootpass
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+volumes:
+  data: {}
+networks:
+  default:
+    name: mongodb_network

@@ -1,7 +1,5 @@
-package com.aaryan11hash.chatservice.Events.PubSub;
+package com.aaryan11hash.chatservice.Events.PubSubService;
 
-import com.aaryan11hash.chatservice.Events.Models.Message;
-import com.aaryan11hash.chatservice.Events.Models.MessagePublisher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.listener.ChannelTopic;

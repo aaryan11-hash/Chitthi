@@ -1,8 +1,12 @@
 package com.aaryan11hash.chatservice.Web.Controller;
 
 
+import com.aaryan11hash.chatservice.Repositories.TestDomainRepository;
+import com.aaryan11hash.chatservice.Web.Domain.TestDomain;
 import com.aaryan11hash.chatservice.Web.Service.ChatMessageService;
 import com.aaryan11hash.chatservice.Web.Service.ChatRoomService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,10 +15,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
+
 @RestController
+@RequiredArgsConstructor
 @RequestMapping
+@Slf4j
 public class ChatRestController {
 
     @Autowired
@@ -23,6 +32,10 @@ public class ChatRestController {
     private ChatMessageService chatMessageService;
     @Autowired
     private ChatRoomService chatRoomService;
+
+
+
+    private final TestDomainRepository testDomainRepository;
 
     @GetMapping("/messages/{senderId}/{recipientId}/count")
     public Mono<ResponseEntity<Long>> countNewMessages(
@@ -43,5 +56,27 @@ public class ChatRestController {
     public ResponseEntity<?> findMessage ( @PathVariable String id) {
         return ResponseEntity
                 .ok(chatMessageService.findById(id));
+    }
+
+    @GetMapping("/save")
+    public String saveData(){
+
+
+        TestDomain td2 = new TestDomain("1101","aaryan");
+        TestDomain td3 = new TestDomain("1102","sanket");
+
+
+        testDomainRepository.save(td2);
+        testDomainRepository.save(td3);
+
+
+
+
+        return "saved";
+    }
+
+    @GetMapping("/list")
+    public List<TestDomain> lisdata(){
+        return testDomainRepository.findAll();
     }
 }

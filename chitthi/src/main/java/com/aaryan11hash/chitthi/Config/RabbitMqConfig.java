@@ -11,24 +11,23 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMqConfig {
 
-    //todo test line to make sure the branching in git is working
-    //todo another test line
-    public static final String TEST_QUEUE1 = "test-queue1";
-    public static final String TEST_QUEUE2 = "test-queue2";
+
+    public static final String BLOB_PROCESS_QUEUE = "blob-process-queue";
+    public static final String BLOB_PROCESS_QUEUE_OUTPUT = "blob-process-queue-output";
     public static final String TEST_QUEUE3 = "test-queue3";
     public static final String TEST_EXCHANGE  ="test_exchange";
-    public static final String TEST_ROUTE1 = "test-route1";
-    public static final String TEST_ROUTE2 = "test-route2";
+    public static final String BLOB_PROCESS_QUEUE_ROUTE = "blob-process-queue-route";
+    public static final String BLOB_PROCESS_QUEUE_OUTPUT_ROUTE = "blob-process-queue-output-route";
     public static final String TEST_ROUTE3 = "test-route3";
 
     @Bean
     public Queue queue1(){
-        return new Queue(TEST_QUEUE1);
+        return new Queue(BLOB_PROCESS_QUEUE);
     }
 
     @Bean
     public Queue queue2(){
-        return new Queue(TEST_QUEUE2);
+        return new Queue(BLOB_PROCESS_QUEUE_OUTPUT);
     }
 
     @Bean
@@ -49,7 +48,7 @@ public class RabbitMqConfig {
         return BindingBuilder
                 .bind(queue1)
                 .to(topicExchange)
-                .with(TEST_ROUTE1);
+                .with(BLOB_PROCESS_QUEUE_ROUTE);
     }
 
     @Bean
@@ -58,7 +57,7 @@ public class RabbitMqConfig {
         return BindingBuilder
                 .bind(queue2)
                 .to(topicExchange)
-                .with(TEST_ROUTE2);
+                .with(BLOB_PROCESS_QUEUE_OUTPUT_ROUTE);
     }
 
     @Bean
