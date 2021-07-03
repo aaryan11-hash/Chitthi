@@ -1,6 +1,6 @@
 package com.aaryan11hash.chatservice.Config;
 
-import com.aaryan11hash.chatservice.Events.Models.MessagePublisher;
+import com.aaryan11hash.chatservice.Events.PubSubService.MessagePublisher;
 import com.aaryan11hash.chatservice.Events.PubSubService.RedisMessagePublisher;
 import com.aaryan11hash.chatservice.Events.PubSubService.RedisMessageSubscriber;
 import org.springframework.beans.factory.annotation.Autowired;

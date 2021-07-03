@@ -4,39 +4,40 @@ import com.aaryan11hash.chatservice.Repositories.ChatMessageRepository;
 import com.aaryan11hash.chatservice.Web.Model.ChatMessage;
 import com.aaryan11hash.chatservice.Web.Model.MessageStatus;
 import com.aaryan11hash.chatservice.exception.ResourceNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
-import org.springframework.data.mongodb.core.ReactiveMongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ChatMessageService {
-    @Autowired private ChatMessageRepository repository;
-    @Autowired private ChatRoomService chatRoomService;
-    @Autowired private ReactiveMongoOperations mongoOperations;
 
-    public Mono<ChatMessage> save(ChatMessage chatMessage) {
+    @Autowired
+    private ChatMessageRepository chatMessageRepository;
 
-        return Mono.just(chatMessage)
-                .flatMap(chatMessage1 -> {
-                    chatMessage.setStatus(MessageStatus.RECEIVED);
-                    repository.save(chatMessage);
-                    return Mono.just(chatMessage1);
-                });
+    @Autowired
+    private ChatRoomService chatRoomService;
+    @Autowired
+    private MongoOperations mongoOperations;
 
+    public ChatMessage save(ChatMessage chatMessage) {
+
+        chatMessage.setStatus(MessageStatus.RECEIVED);
+        chatMessageRepository.save(chatMessage);
+        return chatMessage;
 
     }
 
     public Long countNewMessages(String senderId, String recipientId) {
 
-        return repository.countBySenderIdAndRecipientIdAndStatus(
+        return chatMessageRepository.countBySenderIdAndRecipientIdAndStatus(
                 senderId, recipientId, MessageStatus.RECEIVED);
     }
 
@@ -44,7 +45,7 @@ public class ChatMessageService {
         var chatId = chatRoomService.getChatId(senderId, recipientId, false);
 
         var messages =
-                chatId.map(cId -> repository.findByChatId(cId)).orElse(new ArrayList<>());
+                chatId.map(cId -> chatMessageRepository.findByChatId(cId)).orElse(new ArrayList<>());
 
         if(messages.size() > 0) {
             updateStatuses(senderId, recipientId, MessageStatus.DELIVERED);
@@ -53,15 +54,15 @@ public class ChatMessageService {
         return messages;
     }
 
-    public Mono<ChatMessage> findById(String id) {
-        return repository
+    public ChatMessage findById(String id) {
+        return chatMessageRepository
                 .findById(id)
-                .flatMap(chatMessage -> {
+                .map(chatMessage -> {
                     chatMessage.setStatus(MessageStatus.DELIVERED);
-                    return repository.save(chatMessage);
+                    return chatMessageRepository.save(chatMessage);
                 })
-                .doOnError(chatRoomService->Mono.just(new ResourceNotFoundException("can't find message (" + id + ")")));
-
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("can't find message (" + id + ")"));
 
     }
 

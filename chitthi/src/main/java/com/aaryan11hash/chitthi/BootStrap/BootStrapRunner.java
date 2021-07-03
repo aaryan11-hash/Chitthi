@@ -18,11 +18,6 @@ public class BootStrapRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
-        Flux<TestDomain> list = repository.findAll();
-
-        list.toStream()
-                .forEach(System.out::println);
-
+        //empty
     }
 }

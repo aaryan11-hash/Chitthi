@@ -38,16 +38,16 @@ public class ChatController {
         chatMessage.setChatId(chatId.get());
 
 
-        chatMessageService.save(chatMessage)
-                .map(chatMessage1->{
-                    messagingTemplate.convertAndSendToUser(
-                            chatMessage.getRecipientId(),"/queue/messages",
-                            new ChatNotification(
-                                    chatMessage1.getId(),
-                                    chatMessage1.getSenderId(),
-                                    chatMessage1.getSenderName()));
-                        return chatMessage1;
-                });
+        ChatMessage chatMessage1 = chatMessageService.save(chatMessage);
+
+        messagingTemplate.convertAndSendToUser(
+                chatMessage.getRecipientId(),"/queue/messages",
+                new ChatNotification(
+                        chatMessage1.getId(),
+                        chatMessage1.getSenderId(),
+                        chatMessage1.getSenderName()));
+
+
     }
 
     @MessageMapping("/chat/blob")

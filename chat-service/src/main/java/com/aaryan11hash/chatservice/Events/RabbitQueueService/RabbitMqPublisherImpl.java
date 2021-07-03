@@ -1,5 +1,6 @@
 package com.aaryan11hash.chatservice.Events.RabbitQueueService;
 
+import com.aaryan11hash.chatservice.AppUtils.Converter;
 import com.aaryan11hash.chatservice.Config.RabbitMqConfig;
 import com.aaryan11hash.chatservice.Web.Model.BlobFileMessage;
 import lombok.RequiredArgsConstructor;
@@ -13,11 +14,11 @@ public class RabbitMqPublisherImpl implements RabbitMqPublisher{
 
     private final RabbitTemplate rabbitTemplate;
 
+
     @Override
     public void publishBlobForProcess(BlobFileMessage blobFileMessage) {
 
-        //todo make this run inside Mono wrapper obj
-        rabbitTemplate.convertAndSend(RabbitMqConfig.TEST_EXCHANGE,RabbitMqConfig.TEST_ROUTE1,blobFileMessage);
+        rabbitTemplate.convertAndSend(RabbitMqConfig.TEST_EXCHANGE,RabbitMqConfig.BLOB_PROCESS_QUEUE,Converter.blobFileModelToEvent(blobFileMessage));
 
     }
 

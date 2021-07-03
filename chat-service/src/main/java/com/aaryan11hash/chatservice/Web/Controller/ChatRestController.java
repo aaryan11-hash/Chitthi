@@ -5,7 +5,6 @@ import com.aaryan11hash.chatservice.Repositories.TestDomainRepository;
 import com.aaryan11hash.chatservice.Web.Domain.TestDomain;
 import com.aaryan11hash.chatservice.Web.Service.ChatMessageService;
 import com.aaryan11hash.chatservice.Web.Service.ChatRoomService;
-import com.mongodb.reactivestreams.client.MongoClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -61,8 +62,8 @@ public class ChatRestController {
     public String saveData(){
 
 
-        TestDomain td2 = new TestDomain(null,"aaryan");
-        TestDomain td3 = new TestDomain(null,"sanket");
+        TestDomain td2 = new TestDomain("1101","aaryan");
+        TestDomain td3 = new TestDomain("1102","sanket");
 
 
         testDomainRepository.save(td2);
@@ -75,7 +76,7 @@ public class ChatRestController {
     }
 
     @GetMapping("/list")
-    public Flux<TestDomain> lisdata(){
+    public List<TestDomain> lisdata(){
         return testDomainRepository.findAll();
     }
 }
