@@ -8,6 +8,7 @@ import com.aaryan11hash.chatservice.Web.Model.ChatNotification;
 import com.aaryan11hash.chatservice.Web.Service.ChatMessageService;
 import com.aaryan11hash.chatservice.Web.Service.ChatRoomService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import reactor.core.publisher.Mono;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class ChatController {
@@ -40,12 +42,18 @@ public class ChatController {
 
         ChatMessage chatMessage1 = chatMessageService.save(chatMessage);
 
+        //todo this piece of code will be removed from here,as multiple instances of this project will run,
+        //todo we need to trigger this function in the redis sub class function to make this service fully scalable
         messagingTemplate.convertAndSendToUser(
                 chatMessage.getRecipientId(),"/queue/messages",
-                new ChatNotification(
-                        chatMessage1.getId(),
-                        chatMessage1.getSenderId(),
-                        chatMessage1.getSenderName()));
+
+                ChatNotification.builder()
+                        .id(chatMessage1.getId())
+                        .senderId(chatMessage1.getSenderId())
+                        .senderName(chatMessage1.getSenderName())
+                        .build()
+        );
+
 
 
     }
@@ -53,10 +61,33 @@ public class ChatController {
     @MessageMapping("/chat/blob")
     public void processBlobFile(@Payload BlobFileMessage blobFileMessage){
 
+        var chatId = chatRoomService
+                .getChatId(blobFileMessage.getSenderId(), blobFileMessage.getRecipientId(), true);
+
+        blobFileMessage.setChatId(chatId.get());
+
+        //todo this piece of code will be removed from here,as multiple instances of this project will run,
+        //todo we need to trigger this function in the redis sub class function to make this service fully scalable
+        messagingTemplate.convertAndSendToUser(
+                blobFileMessage.getRecipientId(),"/queue/messages",
+
+                ChatNotification.builder()
+                        .id(blobFileMessage.getId())
+                        .senderId(blobFileMessage.getSenderId())
+                        .senderName(blobFileMessage.getSenderName())
+                        .multipartFile(blobFileMessage.getBlob())
+                        .build()
+        );
+
        rabbitMqPublisher.publishBlobForProcess(blobFileMessage);
 
 
 
+    }
+
+    @MessageMapping("/chat/test")
+    public void testMessage(@Payload String data){
+        log.info(data);
     }
 
 

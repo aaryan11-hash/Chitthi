@@ -19,11 +19,15 @@ public class RabbitMqListner {
     //todo need to make a new event model for this event listner..
     @RabbitListener(queues = RabbitMqConfig.BLOB_PROCESS_QUEUE_OUTPUT)
     public void listen2(BlobFileMessageEvent blobFileMessageEvent){
+
         log.info("at QUEUE2: "+ blobFileMessageEvent);
     }
 
-    @RabbitListener(queues = RabbitMqConfig.TEST_QUEUE3)
+    @RabbitListener(queues = RabbitMqConfig.NOTIFICATION_EVENT)
     public void listen3(TestMessage testMessage){
+
         log.info("at QUEUE3: "+ testMessage);
     }
+
+
 }

@@ -13,7 +13,7 @@ public class RabbitMqConfig {
 
     public static final String BLOB_PROCESS_QUEUE = "blob-process-queue";
     public static final String BLOB_PROCESS_QUEUE_OUTPUT = "blob-process-queue-output";
-    public static final String TEST_QUEUE3 = "test-queue3";
+    public static final String NOTIFICATION_EVENT = "notification-event";
     public static final String TEST_EXCHANGE  ="test_exchange";
     public static final String BLOB_PROCESS_QUEUE_ROUTE = "blob-process-queue-route";
     public static final String BLOB_PROCESS_QUEUE_OUTPUT_ROUTE = "blob-process-queue-output-route";
@@ -32,7 +32,7 @@ public class RabbitMqConfig {
 
     @Bean
     public Queue queue3(){
-        return new Queue(TEST_QUEUE3);
+        return new Queue(NOTIFICATION_EVENT);
     }
 
     @Bean
