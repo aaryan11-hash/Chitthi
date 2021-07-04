@@ -1,0 +1,13 @@
+cloud:
+  aws:
+    credentials:
+      access-key: //your aws access-key
+      secret-key: //your aws secret-key
+    region:
+      static:  //optional
+    stack:
+      auto:
+
+application:
+  bucket:
+    name: //your s3 bucket name

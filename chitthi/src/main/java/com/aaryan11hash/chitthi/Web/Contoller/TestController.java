@@ -2,6 +2,7 @@ package com.aaryan11hash.chitthi.Web.Contoller;
 
 
 import com.aaryan11hash.chitthi.Config.RabbitMqConfig;
+import com.aaryan11hash.chitthi.Events.Models.BlobFileMessageEvent;
 import com.aaryan11hash.chitthi.Events.Models.TestMessage;
 import com.aaryan11hash.chitthi.Repositories.TestDomainRepository;
 import com.aaryan11hash.chitthi.Web.Domain.TestDomain;
@@ -10,15 +11,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/test")
 @RequiredArgsConstructor
 public class TestController {
@@ -39,7 +38,7 @@ public class TestController {
 
     @PostMapping("/check2")
     public ResponseEntity<String> sendTestResponse2(){
-        template.convertAndSend(RabbitMqConfig.TEST_EXCHANGE,RabbitMqConfig.BLOB_PROCESS_QUEUE_OUTPUT,TestMessage.builder().testName("test2").build());
+        template.convertAndSend(RabbitMqConfig.TEST_EXCHANGE,RabbitMqConfig.BLOB_PROCESS_QUEUE_OUTPUT,BlobFileMessageEvent.builder().recipientName("sample").build());
 
         return
                 ResponseEntity.ok().body("DONE");
@@ -48,7 +47,7 @@ public class TestController {
 
     @PostMapping("/check3")
     public ResponseEntity<String> sendTestResponse3(){
-        template.convertAndSend(RabbitMqConfig.TEST_EXCHANGE,RabbitMqConfig.TEST_ROUTE3,TestMessage.builder().testName("test3").build());
+        template.convertAndSend(RabbitMqConfig.TEST_EXCHANGE,RabbitMqConfig.TEST_ROUTE3, BlobFileMessageEvent.builder().recipientName("sample").build());
 
         return ResponseEntity.ok().body("DONE");
 

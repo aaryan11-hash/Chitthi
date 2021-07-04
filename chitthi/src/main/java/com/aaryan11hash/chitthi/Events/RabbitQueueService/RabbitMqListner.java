@@ -22,7 +22,7 @@ public class RabbitMqListner {
 //        log.info("at QUEUE2: "+ testMessage);
 //    }
 
-    @RabbitListener(queues = RabbitMqConfig.TEST_QUEUE3)
+    @RabbitListener(queues = RabbitMqConfig.NOTIFICATION_EVENT)
     public void listen3(TestMessage testMessage){
         log.info("at QUEUE3: "+ testMessage);
     }
