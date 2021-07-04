@@ -1,13 +1,13 @@
 package com.aaryan11hash.chatservice.Web.Service;
 
-import com.aaryan11hash.chatservice.AppUtils.Converter;
-import com.aaryan11hash.chatservice.Repositories.ChatMessageRepository;
+import com.aaryan11hash.chatservice.Repositories.BlobMessageRepository;
+import com.aaryan11hash.chatservice.Web.Domain.BlobFileMessage;
 import com.aaryan11hash.chatservice.Web.Domain.ChatMessage;
 import com.aaryan11hash.chatservice.Web.Enums.MessageStatus;
 import com.aaryan11hash.chatservice.Web.Model.ChatMessageDto;
 import com.aaryan11hash.chatservice.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -18,28 +18,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
-public class ChatMessageService {
+public class BlobMessageService {
 
-    @Autowired
-    private ChatMessageRepository chatMessageRepository;
+    private final BlobMessageRepository blobMessageRepository;
 
-    @Autowired
-    private ChatRoomService chatRoomService;
-    @Autowired
-    private MongoOperations mongoOperations;
+    private final ChatRoomService chatRoomService;
 
-    public ChatMessage save(ChatMessage chatMessage) {
+    private final MongoOperations mongoOperations;
 
-        chatMessage.setStatus(MessageStatus.RECEIVED);
-        chatMessageRepository.save(chatMessage);
-        return chatMessage;
-
+    public BlobFileMessage save(BlobFileMessage blobFileMessage){
+        blobFileMessage.setStatus(MessageStatus.RECEIVED);
+        blobMessageRepository.save(blobFileMessage);
+        return blobFileMessage;
     }
 
     public Long countNewMessages(String senderId, String recipientId) {
 
-        return chatMessageRepository.countBySenderIdAndRecipientIdAndStatus(
+        return blobMessageRepository.countBySenderIdAndRecipientIdAndStatus(
                 senderId, recipientId, MessageStatus.RECEIVED);
     }
 
@@ -47,7 +44,7 @@ public class ChatMessageService {
         var chatId = chatRoomService.getChatId(senderId, recipientId, false);
 
         var messages =
-                chatId.map(cId -> chatMessageRepository.findByChatId(cId)).orElse(new ArrayList<>());
+                chatId.map(cId -> blobMessageRepository.findByChatId(cId)).orElse(new ArrayList<>());
 
         if(messages.size() > 0) {
             updateStatuses(senderId, recipientId, MessageStatus.DELIVERED);
@@ -56,12 +53,12 @@ public class ChatMessageService {
         return messages;
     }
 
-    public ChatMessage findById(String id) {
-        return chatMessageRepository
+    public BlobFileMessage findById(String id) {
+        return blobMessageRepository
                 .findById(id)
                 .map(chatMessage -> {
                     chatMessage.setStatus(MessageStatus.DELIVERED);
-                    return chatMessageRepository.save(chatMessage);
+                    return blobMessageRepository.save(chatMessage);
                 })
                 .orElseThrow(() ->
                         new ResourceNotFoundException("can't find message (" + id + ")"));

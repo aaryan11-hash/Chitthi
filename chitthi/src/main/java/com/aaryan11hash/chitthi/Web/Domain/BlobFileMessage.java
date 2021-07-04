@@ -1,8 +1,10 @@
-package com.aaryan11hash.chatservice.Web.Model;
+package com.aaryan11hash.chitthi.Web.Domain;
 
 
+import com.aaryan11hash.chitthi.Web.Enums.MessageStatus;
 import lombok.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
@@ -12,15 +14,17 @@ import java.util.Date;
 @Getter
 @Setter
 @Data
+@Document
 public class BlobFileMessage {
 
+    @Id
     private String id;
     private String chatId;
     private String senderId;
     private String recipientId;
     private String senderName;
     private String recipientName;
-    private MultipartFile blob;
+    private String blobLink;
     private Date timestamp;
     private MessageStatus status;
 

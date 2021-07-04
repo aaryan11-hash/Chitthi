@@ -1,19 +1,19 @@
-package com.aaryan11hash.chatservice.Events.Models;
+package com.aaryan11hash.chitthi.Web.Model;
 
-import com.aaryan11hash.chatservice.Web.Enums.MessageStatus;
+
+import com.aaryan11hash.chitthi.Web.Enums.MessageStatus;
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 
-
 @Builder
-@Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-public class BlobFileMessageEvent{
+@Data
+public class BlobFileMessageDto {
 
     private String id;
     private String chatId;

@@ -1,30 +1,32 @@
 package com.aaryan11hash.chatservice.AppUtils;
 
 import com.aaryan11hash.chatservice.Events.Models.BlobFileMessageEvent;
-import com.aaryan11hash.chatservice.Web.Model.BlobFileMessage;
-import org.springframework.stereotype.Component;
+import com.aaryan11hash.chatservice.Events.Models.ChatMessageEvent;
+import com.aaryan11hash.chatservice.Web.Domain.BlobFileMessage;
+import com.aaryan11hash.chatservice.Web.Domain.ChatMessage;
+import com.aaryan11hash.chatservice.Web.Model.BlobFileMessageDto;
 
 public class Converter {
 
 
-    public static BlobFileMessageEvent blobFileModelToEvent(BlobFileMessage blobFileMessage){
+    public static BlobFileMessageEvent blobFileModelToEvent(BlobFileMessageDto blobFileMessageDto){
 
         return BlobFileMessageEvent.builder()
-                .id(blobFileMessage.getId())
-                .chatId(blobFileMessage.getChatId())
-                .recipientId(blobFileMessage.getRecipientId())
-                .recipientName(blobFileMessage.getRecipientName())
-                .senderId(blobFileMessage.getSenderId())
-                .senderName(blobFileMessage.getSenderName())
-                .status(blobFileMessage.getStatus())
-                .timestamp(blobFileMessage.getTimestamp())
-                .blob(blobFileMessage.getBlob())
+                .id(blobFileMessageDto.getId())
+                .chatId(blobFileMessageDto.getChatId())
+                .recipientId(blobFileMessageDto.getRecipientId())
+                .recipientName(blobFileMessageDto.getRecipientName())
+                .senderId(blobFileMessageDto.getSenderId())
+                .senderName(blobFileMessageDto.getSenderName())
+                .status(blobFileMessageDto.getStatus())
+                .timestamp(blobFileMessageDto.getTimestamp())
+                .blob(blobFileMessageDto.getBlob())
                 .build();
     }
 
-    public static BlobFileMessage blobFileMessageEventToModel(BlobFileMessageEvent blobFileMessageEvent){
+    public static BlobFileMessageDto blobFileMessageEventToModel(BlobFileMessageEvent blobFileMessageEvent){
 
-        return  BlobFileMessage.builder()
+        return  BlobFileMessageDto.builder()
                 .id(blobFileMessageEvent.getId())
                 .chatId(blobFileMessageEvent.getChatId())
                 .blob(blobFileMessageEvent.getBlob())
@@ -34,6 +36,34 @@ public class Converter {
                 .senderId(blobFileMessageEvent.getSenderId())
                 .status(blobFileMessageEvent.getStatus())
                 .timestamp(blobFileMessageEvent.getTimestamp())
+                .build();
+    }
+
+
+    public static BlobFileMessage blobFileMessageEventToDomain(BlobFileMessageEvent blobFileMessageEvent){
+        return  BlobFileMessage.builder()
+                .id(blobFileMessageEvent.getId())
+                .chatId(blobFileMessageEvent.getChatId())
+                .recipientId(blobFileMessageEvent.getRecipientId())
+                .recipientName(blobFileMessageEvent.getRecipientName())
+                .senderName(blobFileMessageEvent.getSenderName())
+                .senderId(blobFileMessageEvent.getSenderId())
+                .status(blobFileMessageEvent.getStatus())
+                .timestamp(blobFileMessageEvent.getTimestamp())
+                .build();
+    }
+
+    public static ChatMessage chatMessageEventToDomain(ChatMessageEvent chatMessageEvent){
+
+        return  ChatMessage.builder()
+                .id(chatMessageEvent.getId())
+                .chatId(chatMessageEvent.getChatId())
+                .recipientId(chatMessageEvent.getRecipientId())
+                .recipientName(chatMessageEvent.getRecipientName())
+                .senderName(chatMessageEvent.getSenderName())
+                .senderId(chatMessageEvent.getSenderId())
+                .status(chatMessageEvent.getStatus())
+                .timestamp(chatMessageEvent.getTimestamp())
                 .build();
     }
 

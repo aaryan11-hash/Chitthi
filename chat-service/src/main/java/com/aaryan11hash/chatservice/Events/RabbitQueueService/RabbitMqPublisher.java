@@ -1,9 +1,9 @@
 package com.aaryan11hash.chatservice.Events.RabbitQueueService;
 
-import com.aaryan11hash.chatservice.Web.Model.BlobFileMessage;
-import reactor.core.publisher.Mono;
+import com.aaryan11hash.chatservice.Events.Models.BlobFileMessageEvent;
+import com.aaryan11hash.chatservice.Web.Model.BlobFileMessageDto;
 
 public interface RabbitMqPublisher {
 
-    void publishBlobForProcess(BlobFileMessage blobFileMessage);
+    void publishBlobForProcess(BlobFileMessageEvent blobFileMessageEvent);
 }

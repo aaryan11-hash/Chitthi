@@ -1,8 +1,9 @@
 package com.aaryan11hash.chatservice.Config;
 
 import com.aaryan11hash.chatservice.Events.PubSubService.MessagePublisher;
-import com.aaryan11hash.chatservice.Events.PubSubService.RedisMessagePublisher;
+import com.aaryan11hash.chatservice.Events.PubSubService.RedisChatMessagePublisher;
 import com.aaryan11hash.chatservice.Events.PubSubService.RedisMessageSubscriber;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,9 +13,8 @@ import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 import org.springframework.data.redis.serializer.GenericToStringSerializer;
-import org.springframework.stereotype.Component;
 
-@Component
+
 @Configuration
 public class RedisConfiguration {
 
@@ -30,16 +30,16 @@ public class RedisConfiguration {
 
     @Bean
     public RedisMessageListenerContainer container(RedisConnectionFactory redisConnectionFactory, MessageListenerAdapter messageListenerAdapter){
-           RedisMessageListenerContainer redisMessageListenerContainer = new RedisMessageListenerContainer();
-           redisMessageListenerContainer.setConnectionFactory(redisConnectionFactory);
-           redisMessageListenerContainer.addMessageListener(messageListenerAdapter,topic());
-           return redisMessageListenerContainer;
+        RedisMessageListenerContainer redisMessageListenerContainer = new RedisMessageListenerContainer();
+        redisMessageListenerContainer.setConnectionFactory(redisConnectionFactory);
+        redisMessageListenerContainer.addMessageListener(messageListenerAdapter,topic());
+        return redisMessageListenerContainer;
     }
 
     @Bean
     MessageListenerAdapter messageListenerAdapter()
     {
-        return new MessageListenerAdapter(new RedisMessageSubscriber(),"onMessage");
+        return new MessageListenerAdapter(new RedisMessageSubscriber(null,null),"onMessage");
     }
 
 
@@ -55,9 +55,8 @@ public class RedisConfiguration {
     @Bean
     MessagePublisher messagePublisher()
     {
-        return new RedisMessagePublisher(redisTemplate(redisConnectionFactory),topic());
+        return new RedisChatMessagePublisher(redisTemplate(redisConnectionFactory),topic());
     }
-
 //    @Bean
 //    public ObjectMapper objectMapper(){
 //        ObjectMapper mapper = new ObjectMapper();
