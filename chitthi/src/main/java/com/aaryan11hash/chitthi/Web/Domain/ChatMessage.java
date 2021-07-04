@@ -1,5 +1,6 @@
-package com.aaryan11hash.chitthi.Web.Model;
+package com.aaryan11hash.chitthi.Web.Domain;
 
+import com.aaryan11hash.chitthi.Web.Enums.MessageStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

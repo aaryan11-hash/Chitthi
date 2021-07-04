@@ -1,7 +1,7 @@
 package com.aaryan11hash.chatservice.Web.Service;
 
 import com.aaryan11hash.chatservice.Repositories.ChatRoomRepository;
-import com.aaryan11hash.chatservice.Web.Model.ChatRoom;
+import com.aaryan11hash.chatservice.Web.Model.ChatRoomDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ public class ChatRoomService {
 
          return chatRoomRepository
                 .findBySenderIdAndRecipientId(senderId, recipientId)
-                .map(ChatRoom::getChatId)
+                .map(ChatRoomDto::getChatId)
                  .or(() -> {
                     if(!createIfNotExist) {
                         return  Optional.empty();
@@ -25,14 +25,14 @@ public class ChatRoomService {
                      var chatId =
                             String.format("%s_%s", senderId, recipientId);
 
-                    ChatRoom senderRecipient = ChatRoom
+                    ChatRoomDto senderRecipient = ChatRoomDto
                             .builder()
                             .chatId(chatId)
                             .senderId(senderId)
                             .recipientId(recipientId)
                             .build();
 
-                    ChatRoom recipientSender = ChatRoom
+                    ChatRoomDto recipientSender = ChatRoomDto
                             .builder()
                             .chatId(chatId)
                             .senderId(recipientId)

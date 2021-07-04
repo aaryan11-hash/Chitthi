@@ -1,4 +1,4 @@
-package com.aaryan11hash.chatservice.Web.Model;
+package com.aaryan11hash.chitthi.Web.Domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

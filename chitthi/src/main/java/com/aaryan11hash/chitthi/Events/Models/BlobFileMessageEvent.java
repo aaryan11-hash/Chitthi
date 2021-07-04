@@ -1,7 +1,7 @@
 package com.aaryan11hash.chitthi.Events.Models;
 
 
-import com.aaryan11hash.chitthi.Web.Model.MessageStatus;
+import com.aaryan11hash.chitthi.Web.Enums.MessageStatus;
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 

@@ -1,23 +1,22 @@
 package com.aaryan11hash.chatservice.Events.Controller;
 
+import com.aaryan11hash.chatservice.AppUtils.Converter;
+import com.aaryan11hash.chatservice.Events.Models.BlobFileMessageEvent;
+import com.aaryan11hash.chatservice.Events.Models.ChatMessageEvent;
+import com.aaryan11hash.chatservice.Events.PubSubService.RedisChatMessagePublisher;
 import com.aaryan11hash.chatservice.Events.RabbitQueueService.RabbitMqPublisher;
-import com.aaryan11hash.chatservice.Events.RabbitQueueService.RabbitMqPublisherImpl;
-import com.aaryan11hash.chatservice.Web.Model.BlobFileMessage;
-import com.aaryan11hash.chatservice.Web.Model.ChatMessage;
-import com.aaryan11hash.chatservice.Web.Model.ChatNotification;
+import com.aaryan11hash.chatservice.Web.Domain.BlobFileMessage;
+import com.aaryan11hash.chatservice.Web.Domain.ChatMessage;
+import com.aaryan11hash.chatservice.Web.Model.ChatNotificationDto;
+import com.aaryan11hash.chatservice.Web.Service.BlobMessageService;
 import com.aaryan11hash.chatservice.Web.Service.ChatMessageService;
 import com.aaryan11hash.chatservice.Web.Service.ChatRoomService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import reactor.core.publisher.Mono;
 
 @Slf4j
 @Controller
@@ -31,55 +30,65 @@ public class ChatController {
 
     private final ChatRoomService chatRoomService;
 
+    private final BlobMessageService blobMessageService;
+
     private final RabbitMqPublisher rabbitMqPublisher;
 
+    private final RedisChatMessagePublisher redisChatMessagePublisher;
+
+
     @MessageMapping("/chat/simple-text")
-    public void processMessage(@Payload ChatMessage chatMessage) {
+    public void processMessage(@Payload ChatMessageEvent chatMessageEvent) {
         var chatId = chatRoomService
-                .getChatId(chatMessage.getSenderId(), chatMessage.getRecipientId(), true);
-        chatMessage.setChatId(chatId.get());
+                .getChatId(chatMessageEvent.getSenderId(), chatMessageEvent.getRecipientId(), true);
+        chatMessageEvent.setChatId(chatId.get());
 
 
-        ChatMessage chatMessage1 = chatMessageService.save(chatMessage);
+        ChatMessage chatMessageDto1 = chatMessageService.save(Converter.chatMessageEventToDomain(chatMessageEvent));
 
         //todo this piece of code will be removed from here,as multiple instances of this project will run,
         //todo we need to trigger this function in the redis sub class function to make this service fully scalable
         messagingTemplate.convertAndSendToUser(
-                chatMessage.getRecipientId(),"/queue/messages",
+                chatMessageDto1.getRecipientId(),"/queue/messages",
 
-                ChatNotification.builder()
-                        .id(chatMessage1.getId())
-                        .senderId(chatMessage1.getSenderId())
-                        .senderName(chatMessage1.getSenderName())
+                ChatNotificationDto.builder()
+                        .id(chatMessageDto1.getId())
+                        .senderId(chatMessageDto1.getSenderId())
+                        .senderName(chatMessageDto1.getSenderName())
                         .build()
         );
 
-
+        //todo this part will be executed on side threads
+        redisChatMessagePublisher.publish(chatMessageEvent.toString());
 
     }
 
     @MessageMapping("/chat/blob")
-    public void processBlobFile(@Payload BlobFileMessage blobFileMessage){
+    public void processBlobFile(@Payload BlobFileMessageEvent blobFileMessageEvent){
 
         var chatId = chatRoomService
-                .getChatId(blobFileMessage.getSenderId(), blobFileMessage.getRecipientId(), true);
+                .getChatId(blobFileMessageEvent.getSenderId(), blobFileMessageEvent.getRecipientId(), true);
 
-        blobFileMessage.setChatId(chatId.get());
+        blobFileMessageEvent.setChatId(chatId.get());
+
+        //todo blob link for this domain object is empty for now,this will be updated once the chitthi service gets the blob event obj and saves it on s3 and generates a link to access the data
+        BlobFileMessage blobFileMessage = blobMessageService.save(Converter.blobFileMessageEventToDomain(blobFileMessageEvent));
 
         //todo this piece of code will be removed from here,as multiple instances of this project will run,
         //todo we need to trigger this function in the redis sub class function to make this service fully scalable
         messagingTemplate.convertAndSendToUser(
-                blobFileMessage.getRecipientId(),"/queue/messages",
+                blobFileMessageEvent.getRecipientId(),"/queue/messages",
 
-                ChatNotification.builder()
-                        .id(blobFileMessage.getId())
-                        .senderId(blobFileMessage.getSenderId())
-                        .senderName(blobFileMessage.getSenderName())
-                        .multipartFile(blobFileMessage.getBlob())
+                ChatNotificationDto.builder()
+                        .id(blobFileMessageEvent.getId())
+                        .senderId(blobFileMessageEvent.getSenderId())
+                        .senderName(blobFileMessageEvent.getSenderName())
+                        .multipartFile(blobFileMessageEvent.getBlob())
                         .build()
         );
 
-       rabbitMqPublisher.publishBlobForProcess(blobFileMessage);
+        //todo this part will be executed on side threads
+       rabbitMqPublisher.publishBlobForProcess(blobFileMessageEvent);
 
 
 
