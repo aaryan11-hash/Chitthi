@@ -11,7 +11,10 @@ import com.aaryan11hash.chatservice.Web.Model.ChatNotificationDto;
 import com.aaryan11hash.chatservice.Web.Service.BlobMessageService;
 import com.aaryan11hash.chatservice.Web.Service.ChatMessageService;
 import com.aaryan11hash.chatservice.Web.Service.ChatRoomService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -37,42 +40,33 @@ public class ChatController {
     private final RedisChatMessagePublisher redisChatMessagePublisher;
 
 
+    @SneakyThrows
     @MessageMapping("/chat/simple-text")
-    public void processMessage(@Payload ChatMessageEvent chatMessageEvent) {
+    public void processMessage(@Payload ChatMessageEvent chatMessageEvent) throws JsonProcessingException {
+
         var chatId = chatRoomService
                 .getChatId(chatMessageEvent.getSenderId(), chatMessageEvent.getRecipientId(), true);
         chatMessageEvent.setChatId(chatId.get());
 
 
-        ChatMessage chatMessageDto1 = chatMessageService.save(Converter.chatMessageEventToDomain(chatMessageEvent));
+       chatMessageService.save(Converter.chatMessageEventToDomain(chatMessageEvent));
 
-        //todo this piece of code will be removed from here,as multiple instances of this project will run,
-        //todo we need to trigger this function in the redis sub class function to make this service fully scalable
-        messagingTemplate.convertAndSendToUser(
-                chatMessageDto1.getRecipientId(),"/queue/messages",
-
-                ChatNotificationDto.builder()
-                        .id(chatMessageDto1.getId())
-                        .senderId(chatMessageDto1.getSenderId())
-                        .senderName(chatMessageDto1.getSenderName())
-                        .build()
-        );
-
-        //todo this part will be executed on side threads
-        redisChatMessagePublisher.publish(chatMessageEvent.toString());
+       //todo this part will be executed on side threads
+        redisChatMessagePublisher.publish(new ObjectMapper().writeValueAsString(chatMessageEvent));
 
     }
 
     @MessageMapping("/chat/blob")
     public void processBlobFile(@Payload BlobFileMessageEvent blobFileMessageEvent){
 
+        log.info(blobFileMessageEvent.toString());
+
         var chatId = chatRoomService
                 .getChatId(blobFileMessageEvent.getSenderId(), blobFileMessageEvent.getRecipientId(), true);
 
         blobFileMessageEvent.setChatId(chatId.get());
-
-        //todo blob link for this domain object is empty for now,this will be updated once the chitthi service gets the blob event obj and saves it on s3 and generates a link to access the data
-        BlobFileMessage blobFileMessage = blobMessageService.save(Converter.blobFileMessageEventToDomain(blobFileMessageEvent));
+        String blobFileUrl = String.format("%s|%s",blobFileMessageEvent.getChatId(),blobFileMessageEvent.getTimestamp().toString());
+        BlobFileMessage blobFileMessage = blobMessageService.save(Converter.blobFileMessageEventToDomain(blobFileMessageEvent,blobFileUrl));
 
         //todo this piece of code will be removed from here,as multiple instances of this project will run,
         //todo we need to trigger this function in the redis sub class function to make this service fully scalable
@@ -94,10 +88,6 @@ public class ChatController {
 
     }
 
-    @MessageMapping("/chat/test")
-    public void testMessage(@Payload String data){
-        log.info(data);
-    }
 
 
 }

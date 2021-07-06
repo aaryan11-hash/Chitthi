@@ -39,7 +39,7 @@ public class RedisConfiguration {
     @Bean
     MessageListenerAdapter messageListenerAdapter()
     {
-        return new MessageListenerAdapter(new RedisMessageSubscriber(null,null),"onMessage");
+        return new MessageListenerAdapter(new RedisMessageSubscriber(),"onMessage");
     }
 
 
@@ -57,6 +57,8 @@ public class RedisConfiguration {
     {
         return new RedisChatMessagePublisher(redisTemplate(redisConnectionFactory),topic());
     }
+
+
 //    @Bean
 //    public ObjectMapper objectMapper(){
 //        ObjectMapper mapper = new ObjectMapper();

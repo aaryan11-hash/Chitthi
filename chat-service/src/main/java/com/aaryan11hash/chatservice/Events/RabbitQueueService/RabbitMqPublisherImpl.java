@@ -18,7 +18,7 @@ public class RabbitMqPublisherImpl implements RabbitMqPublisher{
     @Override
     public void publishBlobForProcess(BlobFileMessageEvent blobFileMessageEvent) {
 
-        rabbitTemplate.convertAndSend(RabbitMqConfig.TEST_EXCHANGE,RabbitMqConfig.BLOB_PROCESS_QUEUE,blobFileMessageEvent);
+        rabbitTemplate.convertAndSend(RabbitMqConfig.TEST_EXCHANGE,RabbitMqConfig.BLOB_PROCESS_QUEUE_ROUTE,blobFileMessageEvent);
 
     }
 
