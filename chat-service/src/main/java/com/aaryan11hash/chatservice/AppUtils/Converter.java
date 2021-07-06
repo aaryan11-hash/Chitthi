@@ -40,7 +40,7 @@ public class Converter {
     }
 
 
-    public static BlobFileMessage blobFileMessageEventToDomain(BlobFileMessageEvent blobFileMessageEvent){
+    public static BlobFileMessage blobFileMessageEventToDomain(BlobFileMessageEvent blobFileMessageEvent,String blobFileUrl){
         return  BlobFileMessage.builder()
                 .id(blobFileMessageEvent.getId())
                 .chatId(blobFileMessageEvent.getChatId())
@@ -49,6 +49,7 @@ public class Converter {
                 .senderName(blobFileMessageEvent.getSenderName())
                 .senderId(blobFileMessageEvent.getSenderId())
                 .status(blobFileMessageEvent.getStatus())
+                .blobLink(blobFileUrl)
                 .timestamp(blobFileMessageEvent.getTimestamp())
                 .build();
     }

@@ -58,25 +58,4 @@ public class ChatRestController {
                 .ok(chatMessageService.findById(id));
     }
 
-    @GetMapping("/save")
-    public String saveData(){
-
-
-        TestDomain td2 = new TestDomain("1101","aaryan");
-        TestDomain td3 = new TestDomain("1102","sanket");
-
-
-        testDomainRepository.save(td2);
-        testDomainRepository.save(td3);
-
-
-
-
-        return "saved";
-    }
-
-    @GetMapping("/list")
-    public List<TestDomain> lisdata(){
-        return testDomainRepository.findAll();
-    }
 }

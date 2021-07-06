@@ -3,9 +3,11 @@ package com.aaryan11hash.chatservice.Events.PubSubService;
 import com.aaryan11hash.chatservice.Events.Models.ChatMessageEvent;
 import com.aaryan11hash.chatservice.Web.Model.ChatNotificationDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.Message;
 import org.springframework.data.redis.connection.MessageListener;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -16,12 +18,13 @@ import java.util.List;
 
 @Slf4j
 @Service
-@RequiredArgsConstructor
+@NoArgsConstructor
 public class RedisMessageSubscriber implements MessageListener {
 
-    private final ObjectMapper objectMapper;
+    @Autowired
+    private SimpMessagingTemplate simpMessagingTemplate;
 
-    private final SimpMessagingTemplate simpMessagingTemplate;
+
 
     @SneakyThrows
     @Override

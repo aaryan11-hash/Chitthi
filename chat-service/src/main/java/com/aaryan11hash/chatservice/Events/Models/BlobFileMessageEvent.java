@@ -1,6 +1,7 @@
 package com.aaryan11hash.chatservice.Events.Models;
 
 import com.aaryan11hash.chatservice.Web.Enums.MessageStatus;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,6 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Getter
 @Setter
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class BlobFileMessageEvent{
 
     private String id;
