@@ -23,7 +23,7 @@ const connect = () =>{
 };
 
 const sendMessage = () => {
-    stompClient.send("/app/chat/simple-text",{},JSON.stringify({"id":12,"chatId":"335","senderId":"aaryan_11_","recipientId":"sanket_12","senderName":"aaryan","recipientName":"sanket","content":null}));
+    stompClient.send("/app/chat/blob",{},JSON.stringify({"id":12,"chatId":"335","senderId":"aaryan_11_","recipientId":"sanket_12","senderName":"aaryan","recipientName":"sanket","content":null}));
 };
 
 const onConnected = () => {

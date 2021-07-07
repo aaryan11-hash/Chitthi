@@ -15,7 +15,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Data
-@Document
+@Document(collection = "blob")
 public class BlobFileMessage {
 
     @Id

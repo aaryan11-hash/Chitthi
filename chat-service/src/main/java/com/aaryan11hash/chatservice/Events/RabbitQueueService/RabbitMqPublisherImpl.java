@@ -1,9 +1,7 @@
 package com.aaryan11hash.chatservice.Events.RabbitQueueService;
 
-import com.aaryan11hash.chatservice.AppUtils.Converter;
 import com.aaryan11hash.chatservice.Config.RabbitMqConfig;
 import com.aaryan11hash.chatservice.Events.Models.BlobFileMessageEvent;
-import com.aaryan11hash.chatservice.Web.Model.BlobFileMessageDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;

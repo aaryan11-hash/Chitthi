@@ -21,6 +21,7 @@ public class RabbitMqListner {
     public void listen1(BlobFileMessageEvent blobFileMessageEvent){
 
         log.info("received message "+blobFileMessageEvent);
+
         blobStorageService.uploadBlobFile(blobFileMessageEvent);
     }
 
