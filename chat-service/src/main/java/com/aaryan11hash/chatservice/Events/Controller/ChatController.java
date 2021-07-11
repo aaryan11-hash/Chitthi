@@ -3,6 +3,8 @@ package com.aaryan11hash.chatservice.Events.Controller;
 import com.aaryan11hash.chatservice.AppUtils.Converter;
 import com.aaryan11hash.chatservice.Events.Models.BlobFileMessageEvent;
 import com.aaryan11hash.chatservice.Events.Models.ChatMessageEvent;
+import com.aaryan11hash.chatservice.Events.Models.MessagingEvent;
+import com.aaryan11hash.chatservice.Events.PubSubService.MessagePublisher;
 import com.aaryan11hash.chatservice.Events.PubSubService.RedisChatMessagePublisher;
 import com.aaryan11hash.chatservice.Events.RabbitQueueService.RabbitMqPublisher;
 import com.aaryan11hash.chatservice.Web.Domain.BlobFileMessage;
@@ -16,18 +18,21 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
+
+import java.util.concurrent.ExecutorService;
 
 @Slf4j
 @Controller
 @RequiredArgsConstructor
 public class ChatController {
 
-
-    private final SimpMessagingTemplate messagingTemplate;
+    private final MessagePublisher redisChatMessagePublisher;
 
     private final ChatMessageService chatMessageService;
 
@@ -37,25 +42,34 @@ public class ChatController {
 
     private final RabbitMqPublisher rabbitMqPublisher;
 
-    private final RedisChatMessagePublisher redisChatMessagePublisher;
+    private final ExecutorService inputOutputExec;
 
 
     @SneakyThrows
     @MessageMapping("/chat/simple-text")
-    public void processMessage(@Payload ChatMessageEvent chatMessageEvent) throws JsonProcessingException {
+    public void processMessage(@Payload ChatMessageEvent chatMessageEvent){
 
         var chatId = chatRoomService
                 .getChatId(chatMessageEvent.getSenderId(), chatMessageEvent.getRecipientId(), true);
         chatMessageEvent.setChatId(chatId.get());
 
 
-       chatMessageService.save(Converter.chatMessageEventToDomain(chatMessageEvent));
+        inputOutputExec.execute(()->{
+            chatMessageService.save(Converter.chatMessageEventToDomain(chatMessageEvent));
 
-       //todo this part will be executed on side threads
-        redisChatMessagePublisher.publish(new ObjectMapper().writeValueAsString(chatMessageEvent));
+            try {
+                redisChatMessagePublisher.publish(new ObjectMapper().writeValueAsString(MessagingEvent.builder().chatMessageEvent(chatMessageEvent).build()));
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
+
+        });
+
+
 
     }
 
+    @SneakyThrows
     @MessageMapping("/chat/blob")
     public void processBlobFile(@Payload BlobFileMessageEvent blobFileMessageEvent){
 
@@ -66,24 +80,20 @@ public class ChatController {
 
         blobFileMessageEvent.setChatId(chatId.get());
         String blobFileUrl = String.format("%s|%s",blobFileMessageEvent.getChatId(),blobFileMessageEvent.getTimestamp().toString());
-        BlobFileMessage blobFileMessage = blobMessageService.save(Converter.blobFileMessageEventToDomain(blobFileMessageEvent,blobFileUrl));
 
-        //todo this piece of code will be removed from here,as multiple instances of this project will run,
-        //todo we need to trigger this function in the redis sub class function to make this service fully scalable
-        messagingTemplate.convertAndSendToUser(
-                blobFileMessageEvent.getRecipientId(),"/queue/messages",
+        inputOutputExec.execute(()->{
 
-                ChatNotificationDto.builder()
-                        .id(blobFileMessageEvent.getId())
-                        .senderId(blobFileMessageEvent.getSenderId())
-                        .senderName(blobFileMessageEvent.getSenderName())
-                        .multipartFile(blobFileMessageEvent.getBlob())
-                        .build()
-        );
+            BlobFileMessage blobFileMessage = blobMessageService.save(Converter.blobFileMessageEventToDomain(blobFileMessageEvent,blobFileUrl));
+            rabbitMqPublisher.publishBlobForProcess(blobFileMessageEvent);
 
-        //todo this part will be executed on side threads
-       rabbitMqPublisher.publishBlobForProcess(blobFileMessageEvent);
+            try {
+                redisChatMessagePublisher.publish(new ObjectMapper().writeValueAsString(MessagingEvent.builder().blobFileMessageEvent(blobFileMessageEvent).build()));
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
 
+
+        });
 
 
     }

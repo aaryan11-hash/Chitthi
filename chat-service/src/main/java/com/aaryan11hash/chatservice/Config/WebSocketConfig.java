@@ -25,7 +25,6 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         config
                 .setApplicationDestinationPrefixes("/app")
                 .enableStompBrokerRelay("/topic")
-                .setSystemHeartbeatReceiveInterval(2)
                 .setRelayHost("localhost")
                 .setRelayPort(61613)
                 .setClientLogin("guest")
