@@ -1,4 +1,4 @@
-package com.aaryan11hash.authservice.Web.Payload;
+package com.aaryan11hash.authservice.Web.payload;
 
 import lombok.Data;
 
