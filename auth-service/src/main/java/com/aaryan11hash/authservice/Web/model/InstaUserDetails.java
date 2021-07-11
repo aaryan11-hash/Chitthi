@@ -1,4 +1,4 @@
-package com.aaryan11hash.authservice.Web.Models;
+package com.aaryan11hash.authservice.Web.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

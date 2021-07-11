@@ -1,4 +1,4 @@
-package com.aaryan11hash.authservice.Web.Models;
+package com.aaryan11hash.authservice.Web.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -42,7 +42,7 @@ public class User {
         this.password = password;
         this.email = email;
         this.active = true;
-        this.roles = new HashSet() {{ new Role("USER"); }};
+        this.roles = new HashSet<>() {{ new Role("USER"); }};
     }
 
     @Id

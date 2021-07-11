@@ -1,4 +1,4 @@
-package com.aaryan11hash.authservice.Web.Models;
+package com.aaryan11hash.authservice.Web.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
