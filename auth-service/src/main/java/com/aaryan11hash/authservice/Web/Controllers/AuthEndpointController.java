@@ -1,15 +1,14 @@
 package com.aaryan11hash.authservice.Web.Controllers;
 
-
-import com.clone.instagram.authservice.exception.BadRequestException;
-import com.clone.instagram.authservice.exception.EmailAlreadyExistsException;
-import com.clone.instagram.authservice.exception.UsernameAlreadyExistsException;
-import com.clone.instagram.authservice.model.Profile;
-import com.clone.instagram.authservice.model.Role;
-import com.clone.instagram.authservice.model.User;
-import com.clone.instagram.authservice.payload.*;
-import com.clone.instagram.authservice.service.FacebookService;
-import com.clone.instagram.authservice.service.UserService;
+]
+import com.aaryan11hash.authservice.Exception.BadRequestException;
+import com.aaryan11hash.authservice.Exception.EmailAlreadyExistsException;
+import com.aaryan11hash.authservice.Exception.UsernameAlreadyExistsException;
+import com.aaryan11hash.authservice.Web.Services.UserService;
+import com.aaryan11hash.authservice.Web.model.Profile;
+import com.aaryan11hash.authservice.Web.model.Role;
+import com.aaryan11hash.authservice.Web.model.User;
+import com.aaryan11hash.authservice.Web.payload.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
