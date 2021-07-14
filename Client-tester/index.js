@@ -6,7 +6,7 @@ const connect = () =>{
     console.log('connecting')
     const Stomp = require("stompjs");
     var SockJS = require("sockjs-client");
-    SockJS = new SockJS("http://localhost:8001/register-socket");
+    SockJS = new SockJS("http://localhost:9090/register-socket");
     stompClient = Stomp.over(SockJS);
     
     
