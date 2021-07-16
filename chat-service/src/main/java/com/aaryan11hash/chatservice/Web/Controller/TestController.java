@@ -12,9 +12,17 @@ import javax.annotation.PostConstruct;
 @RequestMapping("/test")
 public class TestController {
 
-    @GetMapping("/get1")
+    @GetMapping("/")
     public String get1(){
         return "Working fine";
+    }
+    @GetMapping("/1")
+    public String get2(){
+        return "Working fine1";
+    }
+    @GetMapping("/2")
+    public String get3(){
+        return "Working fine2";
     }
 
     @PostMapping("post1")

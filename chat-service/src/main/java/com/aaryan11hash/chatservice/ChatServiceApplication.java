@@ -8,7 +8,6 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 
 @SpringBootApplication
-@ComponentScan
 @EnableMongoRepositories
 public class ChatServiceApplication {
 

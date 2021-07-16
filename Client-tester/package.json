@@ -13,6 +13,9 @@
     "JSON": "^1.0.0",
     "nodemon": "^2.0.9",
     "sockjs-client": "^1.5.1",
-    "stompjs": "^2.3.3"
+    "stomp": "^0.1.1",
+    "stompjs": "^2.3.3",
+    "websocket": "^1.0.34",
+    "ws": "^7.5.3"
   }
 }

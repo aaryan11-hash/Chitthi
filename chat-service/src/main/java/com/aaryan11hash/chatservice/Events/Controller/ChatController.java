@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
@@ -43,6 +44,8 @@ public class ChatController {
     private final RabbitMqPublisher rabbitMqPublisher;
 
     private final ExecutorService inputOutputExec;
+
+    private final SimpMessagingTemplate simpMessagingTemplate;
 
 
     @SneakyThrows
@@ -96,6 +99,15 @@ public class ChatController {
         });
 
 
+    }
+
+    @SneakyThrows
+    @MessageMapping("/test")
+    @SendTo("/test/subs")
+    public String testEndPoint(@Payload BlobFileMessageEvent event){
+        log.info(event.toString());
+        redisChatMessagePublisher.publish(new ObjectMapper().writeValueAsString(MessagingEvent.builder().blobFileMessageEvent(event).build()));
+        return "Ok";
     }
 
 

@@ -3,10 +3,10 @@
 let stompClient =null;
 
 const connect = () =>{
-    console.log('connecting')
+    console.log('connecting');
     const Stomp = require("stompjs");
     var SockJS = require("sockjs-client");
-    SockJS = new SockJS("http://localhost:9090/register-socket");
+    SockJS = new SockJS("http://localhost:9099/register-socket");
     stompClient = Stomp.over(SockJS);
     
     
@@ -14,7 +14,7 @@ const connect = () =>{
 
     setTimeout(()=>{
         
-        sendMessage();
+        sentTestMessage();
         
     },3000);
        
@@ -26,12 +26,18 @@ const sendMessage = () => {
     stompClient.send("/app/chat/blob",{},JSON.stringify({"id":12,"chatId":"335","senderId":"aaryan_11_","recipientId":"sanket_12","senderName":"aaryan","recipientName":"sanket","content":null}));
 };
 
+const sentTestMessage = () =>{
+    stompClient.send("/app/test",{},JSON.stringify({"id":12,"chatId":"335","senderId":"aaryan_11_","recipientId":"sanket_12","senderName":"aaryan","recipientName":"sanket","blob":null}));
+}
+
 const onConnected = () => {
     console.log("connected");
+    
     stompClient.subscribe(
-         "/queue/messages",
+         "/test/subs",
         onMessageReceived
       );
+
 };
 
 const onError = (err) => {
