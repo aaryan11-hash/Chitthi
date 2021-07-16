@@ -15,4 +15,6 @@ public class MessagingEvent {
 
     private ChatMessageEvent chatMessageEvent;
     private BlobFileMessageEvent blobFileMessageEvent;
+
+
 }
