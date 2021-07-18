@@ -12,11 +12,6 @@ const connect = () =>{
     
     stompClient.connect({}, onConnected, onError);
 
-    setTimeout(()=>{
-        
-        sentTestMessage();
-        
-    },3000);
        
     
     
@@ -52,3 +47,8 @@ const onError = (err) => {
   };
 
 connect();
+setTimeout(()=>{
+        
+    sentTestMessage();
+    
+},3000);
