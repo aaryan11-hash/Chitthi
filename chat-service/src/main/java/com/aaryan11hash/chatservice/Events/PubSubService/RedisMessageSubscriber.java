@@ -37,28 +37,29 @@ public class RedisMessageSubscriber implements MessageListener {
 
         log.info(messagingEvent.toString());
 
-//        if (messagingEvent.getChatMessageEvent() != null) {
-//            simpMessagingTemplate.convertAndSendToUser(
-//                    messagingEvent.getChatMessageEvent().getRecipientId(), "/queue/messages",
-//                    ChatNotificationDto.builder()
-//                            .id(messagingEvent.getChatMessageEvent().getId())
-//                            .senderId(messagingEvent.getChatMessageEvent().getSenderId())
-//                            .senderName(messagingEvent.getChatMessageEvent().getSenderName())
-//                            .build()
-//            );
-//        }
-//
-//        else if(messagingEvent.getBlobFileMessageEvent()!=null){
-//            simpMessagingTemplate.convertAndSendToUser(
-//                    messagingEvent.getBlobFileMessageEvent().getRecipientId(),"/queue/messages",
-//
-//                    ChatNotificationDto.builder()
-//                            .id(messagingEvent.getBlobFileMessageEvent().getId())
-//                            .senderId(messagingEvent.getBlobFileMessageEvent().getSenderId())
-//                            .senderName(messagingEvent.getBlobFileMessageEvent().getSenderName())
-//                            .multipartFile(messagingEvent.getBlobFileMessageEvent().getBlob())
-//                            .build()
-//            );
-//        }
+
+        if (messagingEvent.getChatMessageEvent() != null) {
+            simpMessagingTemplate.convertAndSendToUser(
+                    messagingEvent.getChatMessageEvent().getRecipientId(), "/queue/messages",
+                    ChatNotificationDto.builder()
+                            .id(messagingEvent.getChatMessageEvent().getId())
+                            .senderId(messagingEvent.getChatMessageEvent().getSenderId())
+                            .senderName(messagingEvent.getChatMessageEvent().getSenderName())
+                            .build()
+            );
+        }
+
+        else if(messagingEvent.getBlobFileMessageEvent()!=null){
+            simpMessagingTemplate.convertAndSendToUser(
+                    messagingEvent.getBlobFileMessageEvent().getRecipientId(),"/queue/messages",
+
+                    ChatNotificationDto.builder()
+                           .id(messagingEvent.getBlobFileMessageEvent().getId())
+                           .senderId(messagingEvent.getBlobFileMessageEvent().getSenderId())
+                            .senderName(messagingEvent.getBlobFileMessageEvent().getSenderName())
+                            .multipartFile(messagingEvent.getBlobFileMessageEvent().getBlob())
+                           .build()
+            );
+        }
     }
-}
+            }
