@@ -25,6 +25,7 @@ import java.util.List;
 @Primary
 public class RedisMessageSubscriber implements MessageListener {
 
+    @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
 
 
@@ -50,8 +51,8 @@ public class RedisMessageSubscriber implements MessageListener {
         }
 
         else if(messagingEvent.getBlobFileMessageEvent()!=null){
-            simpMessagingTemplate.convertAndSendToUser(
-                    messagingEvent.getBlobFileMessageEvent().getRecipientId(),"/queue/messages",
+            simpMessagingTemplate.convertAndSend(
+                    "/test/subs",
 
                     ChatNotificationDto.builder()
                            .id(messagingEvent.getBlobFileMessageEvent().getId())

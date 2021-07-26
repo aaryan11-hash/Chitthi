@@ -13,4 +13,5 @@ public class TestMessage {
 
     private String testName;
     private Long testVal;
+    private NotificationType notificationType;
 }

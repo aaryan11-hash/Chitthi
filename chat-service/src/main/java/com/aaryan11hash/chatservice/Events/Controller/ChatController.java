@@ -49,7 +49,7 @@ public class ChatController {
 
 
     @SneakyThrows
-    @MessageMapping("/chat/simple-text")
+    @MessageMapping("/topic/chat/simple-text")
     public void processMessage(@Payload ChatMessageEvent chatMessageEvent){
 
         var chatId = chatRoomService
@@ -73,7 +73,7 @@ public class ChatController {
     }
 
     @SneakyThrows
-    @MessageMapping("/chat/blob")
+    @MessageMapping("/topic/chat/blob")
     public void processBlobFile(@Payload BlobFileMessageEvent blobFileMessageEvent){
 
         log.info(blobFileMessageEvent.toString());
@@ -103,11 +103,10 @@ public class ChatController {
 
     @SneakyThrows
     @MessageMapping("/test")
-    @SendTo("/test/subs")
-    public String testEndPoint(@Payload BlobFileMessageEvent event){
+    public void testEndPoint(@Payload BlobFileMessageEvent event){
         log.info(event.toString());
         redisChatMessagePublisher.publish(new ObjectMapper().writeValueAsString(MessagingEvent.builder().blobFileMessageEvent(event).build()));
-        return "Ok";
+
     }
 
 
