@@ -52,10 +52,9 @@ public class RedisMessageSubscriber implements MessageListener {
 
         else if(messagingEvent.getBlobFileMessageEvent()!=null){
             simpMessagingTemplate.convertAndSend(
-                    "/test/subs",
+                    "/topic/subs",
 
                     ChatNotificationDto.builder()
-                           .id(messagingEvent.getBlobFileMessageEvent().getId())
                            .senderId(messagingEvent.getBlobFileMessageEvent().getSenderId())
                             .senderName(messagingEvent.getBlobFileMessageEvent().getSenderName())
                             .multipartFile(messagingEvent.getBlobFileMessageEvent().getBlob())

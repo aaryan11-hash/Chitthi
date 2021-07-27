@@ -1,4 +1,5 @@
 
+const eurekaRegistry = require('./eurekaRegistry');
 
 let stompClient =null;
 
@@ -12,9 +13,6 @@ const connect = () =>{
     
     stompClient.connect({}, onConnected, onError);
 
-       
-    
-    
 };
 
 const sendMessage = () => {
@@ -52,3 +50,5 @@ setTimeout(()=>{
     sentTestMessage();
     
 },3000);
+
+new eurekaRegistry().registerWithEureka("CLIENT-TESTER-SERVICE",3000);

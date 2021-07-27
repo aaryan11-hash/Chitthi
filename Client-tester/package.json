@@ -10,6 +10,7 @@
   "author": "aaryan",
   "license": "ISC",
   "dependencies": {
+    "eureka-js-client": "^4.5.0",
     "JSON": "^1.0.0",
     "nodemon": "^2.0.9",
     "sockjs-client": "^1.5.1",

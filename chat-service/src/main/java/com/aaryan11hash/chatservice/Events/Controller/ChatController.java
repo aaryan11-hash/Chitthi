@@ -23,7 +23,9 @@ import org.springframework.core.task.TaskExecutor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.messaging.simp.annotation.SubscribeMapping;
 import org.springframework.stereotype.Controller;
 
 import java.util.concurrent.ExecutorService;
@@ -49,7 +51,7 @@ public class ChatController {
 
 
     @SneakyThrows
-    @MessageMapping("/topic/chat/simple-text")
+    @MessageMapping("/chat/simple-text")
     public void processMessage(@Payload ChatMessageEvent chatMessageEvent){
 
         var chatId = chatRoomService
@@ -73,7 +75,7 @@ public class ChatController {
     }
 
     @SneakyThrows
-    @MessageMapping("/topic/chat/blob")
+    @MessageMapping("/chat/blob")
     public void processBlobFile(@Payload BlobFileMessageEvent blobFileMessageEvent){
 
         log.info(blobFileMessageEvent.toString());
@@ -101,12 +103,14 @@ public class ChatController {
 
     }
 
+
     @SneakyThrows
     @MessageMapping("/test")
-    public void testEndPoint(@Payload BlobFileMessageEvent event){
+    @SendTo("/topic/test/subs")
+    public String testEndPoint(@Payload BlobFileMessageEvent event){
         log.info(event.toString());
         redisChatMessagePublisher.publish(new ObjectMapper().writeValueAsString(MessagingEvent.builder().blobFileMessageEvent(event).build()));
-
+        return "VALUE";
     }
 
 
