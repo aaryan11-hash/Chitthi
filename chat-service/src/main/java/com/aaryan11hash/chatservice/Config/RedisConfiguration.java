@@ -3,7 +3,6 @@ package com.aaryan11hash.chatservice.Config;
 import com.aaryan11hash.chatservice.Events.PubSubService.MessagePublisher;
 import com.aaryan11hash.chatservice.Events.PubSubService.RedisChatMessagePublisher;
 import com.aaryan11hash.chatservice.Events.PubSubService.RedisMessageSubscriber;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,14 +17,18 @@ import org.springframework.data.redis.serializer.GenericToStringSerializer;
 @Configuration
 public class RedisConfiguration {
 
-    public static final String TEST_TOPIC_FOR_EVENT = "test-topic-for-event";
+    public static final String PUBLISH_EVENT_FROM_USER = "publish-event-from-user";
+
+
+    @Autowired
+    RedisMessageSubscriber redisMessageSubscriber;
 
     @Autowired
     private RedisConnectionFactory redisConnectionFactory;
 
     @Bean
     public ChannelTopic topic() {
-        return new ChannelTopic(TEST_TOPIC_FOR_EVENT);
+        return new ChannelTopic(PUBLISH_EVENT_FROM_USER);
     }
 
     @Bean
@@ -39,7 +42,7 @@ public class RedisConfiguration {
     @Bean
     MessageListenerAdapter messageListenerAdapter()
     {
-        return new MessageListenerAdapter(new RedisMessageSubscriber(),"onMessage");
+        return new MessageListenerAdapter(redisMessageSubscriber,"onMessage");
     }
 
 
