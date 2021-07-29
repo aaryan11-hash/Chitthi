@@ -1,4 +1,12 @@
+const PORT = 5000;
 
+const app = (require('express'))();
+
+app.use('/test',require('./middleController'));
+
+app.listen(PORT,()=>console.log('Server created'));
+
+new (require('./eurekaRegistry'))().registerWithEureka('CLIENT-TESTER-SERVICE',5000);
 
 let stompClient =null;
 
@@ -12,9 +20,6 @@ const connect = () =>{
     
     stompClient.connect({}, onConnected, onError);
 
-       
-    
-    
 };
 
 const sendMessage = () => {
@@ -29,7 +34,7 @@ const onConnected = () => {
     console.log("connected");
     
     stompClient.subscribe(
-         "/test/subs",
+         "/topic/blob",
         onMessageReceived
       );
 
@@ -52,3 +57,4 @@ setTimeout(()=>{
     sentTestMessage();
     
 },3000);
+

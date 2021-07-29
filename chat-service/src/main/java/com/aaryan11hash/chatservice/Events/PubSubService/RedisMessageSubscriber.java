@@ -22,14 +22,11 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-@Primary
 public class RedisMessageSubscriber implements MessageListener {
 
-    @Autowired
-    private SimpMessagingTemplate simpMessagingTemplate;
+    private final SimpMessagingTemplate simpMessagingTemplate;
 
-
-    @SneakyThrows({NullPointerException.class, JsonProcessingException.class})
+    @SneakyThrows({NullPointerException.class,JsonProcessingException.class})
     @Override
     public void onMessage(Message message, byte[] bytes) {
 
@@ -41,7 +38,7 @@ public class RedisMessageSubscriber implements MessageListener {
 
         if (messagingEvent.getChatMessageEvent() != null) {
             simpMessagingTemplate.convertAndSendToUser(
-                    messagingEvent.getChatMessageEvent().getRecipientId(), "/queue/messages",
+                    messagingEvent.getChatMessageEvent().getRecipientId(), "/topic/messages",
                     ChatNotificationDto.builder()
                             .id(messagingEvent.getChatMessageEvent().getId())
                             .senderId(messagingEvent.getChatMessageEvent().getSenderId())
@@ -52,15 +49,16 @@ public class RedisMessageSubscriber implements MessageListener {
 
         else if(messagingEvent.getBlobFileMessageEvent()!=null){
             simpMessagingTemplate.convertAndSend(
-                    "/test/subs",
+                    "/topic/blob",
 
                     ChatNotificationDto.builder()
-                           .id(messagingEvent.getBlobFileMessageEvent().getId())
                            .senderId(messagingEvent.getBlobFileMessageEvent().getSenderId())
                             .senderName(messagingEvent.getBlobFileMessageEvent().getSenderName())
                             .multipartFile(messagingEvent.getBlobFileMessageEvent().getBlob())
                            .build()
             );
         }
+
+
     }
-            }
+}

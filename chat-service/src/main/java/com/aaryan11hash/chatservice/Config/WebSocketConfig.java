@@ -1,10 +1,12 @@
 package com.aaryan11hash.chatservice.Config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.converter.DefaultContentTypeResolver;
 import org.springframework.messaging.converter.MappingJackson2MessageConverter;
 import org.springframework.messaging.converter.MessageConverter;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
@@ -19,12 +21,15 @@ import java.util.List;
 @EnableWebSocket
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
+
+
+
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
 
         config
                 .setApplicationDestinationPrefixes("/app")
-                .enableStompBrokerRelay("/topic")
+                .enableStompBrokerRelay("/topic","/queue")
                 .setRelayHost("localhost")
                 .setRelayPort(61613)
                 .setClientLogin("guest")
@@ -40,6 +45,10 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
                 .addEndpoint("/register-socket")
                 .setAllowedOriginPatterns()
                 .withSockJS();
+
+        registry
+                .addEndpoint("/register")
+        .setAllowedOriginPatterns();
 
     }
 
