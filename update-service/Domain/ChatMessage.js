@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const chatRoomService = require('../Service/ChatRoomService');
 
 const chatMessage = mongoose.Schema({
     id : String,
@@ -38,5 +38,29 @@ module.exports = {
             return chatMessage;
         });
 
+    },
+
+    findChatMessages : async function(senderId , recipientId){
+
+        var chatMessageId = await chatRoomService.getChatId(senderId,recipientId);
+        
+        var chatMessages = await ChatMessage.find({chatId : chatMessageId},(err,messages)=>{
+            if(err)
+                throw err;
+            
+                return messages;
+        });
+        this.updateSatus(senderId,recipientId,'DELIVERED');
+        
+        return chatMessages;
+    },
+
+    updateSatus : async function(senderId, recipientId, messageSatus){
+        Model.where({ _id: id }).update({ title: 'words' })
+
+        ChatMessage.where({senderId : senderId, recipientId : recipientId})
+                   .update({status : messageSatus});
     }
+
+
 }
