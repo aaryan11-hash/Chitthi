@@ -14,14 +14,15 @@ public class APIRoutes {
     public RouteLocator ApiRoutes(RouteLocatorBuilder builder){
 
         return builder.routes()
-                //REST Controller endpoints
+                //REST Controller endpoints for Nodejs update service project
                 .route(r->r.path("/messages/*/*/count","/messages/*/*","/messages/*")
-                        .uri("lb://chat-service")
+                        .uri("lb://UPDATE-SERVICE")
                 )
-                //STOMP Brocker endpoints
-                .route(r->r.path("/register-socket","/app/chat/simple-text","/app/chat/blob")
-                        .uri("lb://chat-service")
-                        )
+//                //STOMP Brocker endpoints
+//                .route(r->r.path("/register-socket","/app/chat/simple-text","/app/chat/blob")
+//                        .uri("lb://chat-service")
+//                        )
+
                 .build();
 
     }
