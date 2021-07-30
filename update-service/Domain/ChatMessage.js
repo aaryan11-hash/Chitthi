@@ -50,16 +50,37 @@ module.exports = {
             
                 return messages;
         });
-        this.updateSatus(senderId,recipientId,'DELIVERED');
+        //todo enum changes to be made
+        if(chatMessage.length > 0)
+            this.updateSatus(senderId,recipientId,'DELIVERED');
         
         return chatMessages;
     },
 
-    updateSatus : async function(senderId, recipientId, messageSatus){
-        Model.where({ _id: id }).update({ title: 'words' })
 
-        ChatMessage.where({senderId : senderId, recipientId : recipientId})
+    findById : async function(id){
+
+        var chatMessages = await ChatMessage.find({id : id},(err,data)=>{
+
+            if(err)
+                throw err;
+            
+            if(data !== undefined)
+                this.updateSatus(id,undefined,undefined,'DELIVERED');
+            
+        });
+
+    },
+
+    updateSatus : async function(id,senderId, recipientId, messageSatus){
+        
+        if(id === undefined){
+            ChatMessage.where({senderId : senderId, recipientId : recipientId})
                    .update({status : messageSatus});
+        }else{
+            ChatMessage.where({id : id})
+            .update({status : messageSatus});
+        }
     }
 
 
