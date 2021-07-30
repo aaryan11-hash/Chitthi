@@ -19,7 +19,7 @@ public class APIRoutes {
                         .uri("lb://chat-service")
                 )
                 //STOMP Brocker endpoints
-                .route(r->r.path("/register-socket","/app/chat/simple-text","app/chat/blob")
+                .route(r->r.path("/register-socket","/app/chat/simple-text","/app/chat/blob")
                         .uri("lb://chat-service")
                         )
                 .build();

@@ -22,25 +22,25 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-@Primary
 public class RedisMessageSubscriber implements MessageListener {
 
-    private SimpMessagingTemplate simpMessagingTemplate;
+    private final SimpMessagingTemplate simpMessagingTemplate;
 
+    private final ObjectMapper objectMapper;
 
-    @SneakyThrows({NullPointerException.class, JsonProcessingException.class})
+    @SneakyThrows({NullPointerException.class,JsonProcessingException.class})
     @Override
     public void onMessage(Message message, byte[] bytes) {
 
         //todo there is some bug regarding the object mapper,everytime a new event obj is sent we need to instanciate a new object mapper for the same process.
-        MessagingEvent messagingEvent = new ObjectMapper().readValue(message.toString(), MessagingEvent.class);
+        MessagingEvent messagingEvent = objectMapper.readValue(message.toString(), MessagingEvent.class);
 
         log.info(messagingEvent.toString());
 
 
         if (messagingEvent.getChatMessageEvent() != null) {
             simpMessagingTemplate.convertAndSendToUser(
-                    messagingEvent.getChatMessageEvent().getRecipientId(), "/queue/messages",
+                    messagingEvent.getChatMessageEvent().getRecipientId(), "/topic/messages",
                     ChatNotificationDto.builder()
                             .id(messagingEvent.getChatMessageEvent().getId())
                             .senderId(messagingEvent.getChatMessageEvent().getSenderId())
@@ -50,16 +50,17 @@ public class RedisMessageSubscriber implements MessageListener {
         }
 
         else if(messagingEvent.getBlobFileMessageEvent()!=null){
-            simpMessagingTemplate.convertAndSendToUser(
-                    messagingEvent.getBlobFileMessageEvent().getRecipientId(),"/queue/messages",
+            simpMessagingTemplate.convertAndSend(
+                    "/topic/blob",
 
                     ChatNotificationDto.builder()
-                           .id(messagingEvent.getBlobFileMessageEvent().getId())
                            .senderId(messagingEvent.getBlobFileMessageEvent().getSenderId())
                             .senderName(messagingEvent.getBlobFileMessageEvent().getSenderName())
                             .multipartFile(messagingEvent.getBlobFileMessageEvent().getBlob())
                            .build()
             );
         }
+
+
     }
-            }
+}

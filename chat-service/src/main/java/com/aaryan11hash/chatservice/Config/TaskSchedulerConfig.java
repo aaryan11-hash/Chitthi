@@ -5,8 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 
 @Configuration
@@ -14,9 +13,12 @@ import java.util.concurrent.Executors;
 public class TaskSchedulerConfig {
 
 
+    //TODO V.IMP decision to be made here, how to make trade-off btw throughput and resources
+    //IMP Link :- https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/concurrent/ThreadPoolExecutor.html
     @Bean
     public ExecutorService inputOutputExec(){
-        return Executors.newCachedThreadPool();
+
+        return new ThreadPoolExecutor(Runtime.getRuntime().availableProcessors()/2,200,Long.MAX_VALUE, TimeUnit.NANOSECONDS,new ArrayBlockingQueue<Runnable>(1000));
     }
 
 

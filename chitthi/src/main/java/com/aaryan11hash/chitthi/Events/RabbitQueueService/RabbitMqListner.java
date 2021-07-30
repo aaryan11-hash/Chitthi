@@ -5,6 +5,7 @@ import com.aaryan11hash.chitthi.Config.RabbitMqConfig;
 import com.aaryan11hash.chitthi.Events.Models.BlobFileMessageEvent;
 import com.aaryan11hash.chitthi.Events.Models.TestMessage;
 import com.aaryan11hash.chitthi.Services.BlobStorageService;
+import com.aaryan11hash.chitthi.Services.MailingService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -16,6 +17,8 @@ import org.springframework.stereotype.Service;
 public class RabbitMqListner {
 
     private final BlobStorageService blobStorageService;
+
+    public final MailingService mailingService;
 
     @RabbitListener(queues = RabbitMqConfig.BLOB_PROCESS_QUEUE)
     public void listen1(BlobFileMessageEvent blobFileMessageEvent){

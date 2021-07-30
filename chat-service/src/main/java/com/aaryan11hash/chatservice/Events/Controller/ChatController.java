@@ -23,7 +23,9 @@ import org.springframework.core.task.TaskExecutor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.messaging.simp.annotation.SubscribeMapping;
 import org.springframework.stereotype.Controller;
 
 import java.util.concurrent.ExecutorService;
@@ -45,19 +47,16 @@ public class ChatController {
 
     private final ExecutorService inputOutputExec;
 
-    private final SimpMessagingTemplate simpMessagingTemplate;
-
-
     @SneakyThrows
     @MessageMapping("/chat/simple-text")
     public void processMessage(@Payload ChatMessageEvent chatMessageEvent){
 
-        var chatId = chatRoomService
-                .getChatId(chatMessageEvent.getSenderId(), chatMessageEvent.getRecipientId(), true);
-        chatMessageEvent.setChatId(chatId.get());
-
-
         inputOutputExec.execute(()->{
+
+            var chatId = chatRoomService
+                    .getChatId(chatMessageEvent.getSenderId(), chatMessageEvent.getRecipientId(), true);
+            chatMessageEvent.setChatId(chatId.get());
+
             chatMessageService.save(Converter.chatMessageEventToDomain(chatMessageEvent));
 
             try {
@@ -76,15 +75,16 @@ public class ChatController {
     @MessageMapping("/chat/blob")
     public void processBlobFile(@Payload BlobFileMessageEvent blobFileMessageEvent){
 
-        log.info(blobFileMessageEvent.toString());
-
-        var chatId = chatRoomService
-                .getChatId(blobFileMessageEvent.getSenderId(), blobFileMessageEvent.getRecipientId(), true);
-
-        blobFileMessageEvent.setChatId(chatId.get());
-        String blobFileUrl = String.format("%s|%s",blobFileMessageEvent.getChatId(),blobFileMessageEvent.getTimestamp().toString());
-
         inputOutputExec.execute(()->{
+
+            log.info(blobFileMessageEvent.toString());
+
+            var chatId = chatRoomService
+                    .getChatId(blobFileMessageEvent.getSenderId(), blobFileMessageEvent.getRecipientId(), true);
+
+            blobFileMessageEvent.setChatId(chatId.get());
+            String blobFileUrl = String.format("%s|%s",blobFileMessageEvent.getChatId(),blobFileMessageEvent.getTimestamp().toString());
+
 
             BlobFileMessage blobFileMessage = blobMessageService.save(Converter.blobFileMessageEventToDomain(blobFileMessageEvent,blobFileUrl));
             rabbitMqPublisher.publishBlobForProcess(blobFileMessageEvent);
@@ -101,14 +101,15 @@ public class ChatController {
 
     }
 
+
     @SneakyThrows
     @MessageMapping("/test")
-    @SendTo("/test/subs")
-    public String testEndPoint(@Payload BlobFileMessageEvent event){
+    public void testEndPoint(@Payload BlobFileMessageEvent event){
         log.info(event.toString());
         redisChatMessagePublisher.publish(new ObjectMapper().writeValueAsString(MessagingEvent.builder().blobFileMessageEvent(event).build()));
-        return "Ok";
     }
+
+
 
 
 

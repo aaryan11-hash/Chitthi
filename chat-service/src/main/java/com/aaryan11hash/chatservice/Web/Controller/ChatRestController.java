@@ -26,14 +26,11 @@ import java.util.List;
 @Slf4j
 public class ChatRestController {
 
-    @Autowired
-    private SimpMessagingTemplate messagingTemplate;
-    @Autowired
-    private ChatMessageService chatMessageService;
-    @Autowired
-    private ChatRoomService chatRoomService;
+    private final SimpMessagingTemplate messagingTemplate;
 
+    private final ChatMessageService chatMessageService;
 
+    private final ChatRoomService chatRoomService;
 
     private final TestDomainRepository testDomainRepository;
 
