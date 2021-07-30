@@ -1,5 +1,9 @@
-// const mClient = require('mongoose');
+const mongoose = require('mongoose');
 
-// const conn = mClient.createConnection('mongodb://rootuser:rootpass@localhost:27017/test',{ useNewUrlParser: true,autoIndex: false });
+mongoose.connect('mongodb+srv://aaryan1101:aaryan1101@cluster0.ddchx.mongodb.net/chitthi?retryWrites=true&w=majority&ssl=true',{ useNewUrlParser: true , collection : 'testDomain'});
 
-// module.exports = conn;
+mongoose.connection.once('open',() => console.log('Mongoose Connection has been made'))
+                   .on('error',() => console.log('Mongoose Connection error'));
+
+
+module.exports = mongoose.connection;

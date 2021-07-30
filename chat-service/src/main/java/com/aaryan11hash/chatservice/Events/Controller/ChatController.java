@@ -51,12 +51,12 @@ public class ChatController {
     @MessageMapping("/chat/simple-text")
     public void processMessage(@Payload ChatMessageEvent chatMessageEvent){
 
-        var chatId = chatRoomService
-                .getChatId(chatMessageEvent.getSenderId(), chatMessageEvent.getRecipientId(), true);
-        chatMessageEvent.setChatId(chatId.get());
-
-
         inputOutputExec.execute(()->{
+
+            var chatId = chatRoomService
+                    .getChatId(chatMessageEvent.getSenderId(), chatMessageEvent.getRecipientId(), true);
+            chatMessageEvent.setChatId(chatId.get());
+
             chatMessageService.save(Converter.chatMessageEventToDomain(chatMessageEvent));
 
             try {

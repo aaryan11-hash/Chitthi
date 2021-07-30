@@ -6,55 +6,62 @@ app.use('/test',require('./middleController'));
 
 app.listen(PORT,()=>console.log('Server created'));
 
-new (require('./eurekaRegistry'))().registerWithEureka('CLIENT-TESTER-SERVICE',5000);
+//new (require('./eurekaRegistry'))().registerWithEureka('CLIENT-TESTER-SERVICE',PORT);
 
-let stompClient =null;
+const domain = require('./Schema');
 
-const connect = () =>{
-    console.log('connecting');
-    const Stomp = require("stompjs");
-    var SockJS = require("sockjs-client");
-    SockJS = new SockJS("http://localhost:9099/register-socket");
-    stompClient = Stomp.over(SockJS);
+const data = domain.fetchData();
+
+console.log(data);
+
+
+// let stompClient =null;
+
+// const connect = () =>{
+//     console.log('connecting');
+//     const Stomp = require("stompjs");
+//     var SockJS = require("sockjs-client");
+//     SockJS = new SockJS("http://localhost:9096/register-socket");
+//     stompClient = Stomp.over(SockJS);
     
     
-    stompClient.connect({}, onConnected, onError);
+//     stompClient.connect({}, onConnected, onError);
 
-};
+// };
 
-const sendMessage = () => {
-    stompClient.send("/app/chat/blob",{},JSON.stringify({"id":12,"chatId":"335","senderId":"aaryan_11_","recipientId":"sanket_12","senderName":"aaryan","recipientName":"sanket","content":null}));
-};
+// const sendMessage = () => {
+//     stompClient.send("/app/chat/blob",{},JSON.stringify({"id":12,"chatId":"335","senderId":"aaryan_11_","recipientId":"sanket_12","senderName":"aaryan","recipientName":"sanket","content":null}));
+// };
 
-const sentTestMessage = () =>{
-    stompClient.send("/app/test",{},JSON.stringify({"id":12,"chatId":"335","senderId":"aaryan_11_","recipientId":"sanket_12","senderName":"aaryan","recipientName":"sanket","blob":null}));
-}
+// const sentTestMessage = () =>{
+//     stompClient.send("/app/test",{},JSON.stringify({"id":12,"chatId":"335","senderId":"aaryan_11_","recipientId":"sanket_12","senderName":"aaryan","recipientName":"sanket","blob":null}));
+// }
 
-const onConnected = () => {
-    console.log("connected");
+// const onConnected = () => {
+//     console.log("connected");
     
-    stompClient.subscribe(
-         "/topic/blob",
-        onMessageReceived
-      );
+//     stompClient.subscribe(
+//          "/topic/blob",
+//         onMessageReceived
+//       );
 
-};
+// };
 
-const onError = (err) => {
-    console.log(err);
-  };
+// const onError = (err) => {
+//     console.log(err);
+//   };
 
-  const onMessageReceived = (msg) => {
+//   const onMessageReceived = (msg) => {
    
-      console.log("Received a new message from " + msg);
+//       console.log("Received a new message from " + msg);
     
     
-  };
+//   };
 
-connect();
-setTimeout(()=>{
+// connect();
+// setTimeout(()=>{
         
-    sentTestMessage();
+//     sentTestMessage();
     
-},3000);
+// },3000);
 

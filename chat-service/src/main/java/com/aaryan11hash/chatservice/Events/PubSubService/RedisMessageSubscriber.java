@@ -26,12 +26,14 @@ public class RedisMessageSubscriber implements MessageListener {
 
     private final SimpMessagingTemplate simpMessagingTemplate;
 
+    private final ObjectMapper objectMapper;
+
     @SneakyThrows({NullPointerException.class,JsonProcessingException.class})
     @Override
     public void onMessage(Message message, byte[] bytes) {
 
         //todo there is some bug regarding the object mapper,everytime a new event obj is sent we need to instanciate a new object mapper for the same process.
-        MessagingEvent messagingEvent = new ObjectMapper().readValue(message.toString(), MessagingEvent.class);
+        MessagingEvent messagingEvent = objectMapper.readValue(message.toString(), MessagingEvent.class);
 
         log.info(messagingEvent.toString());
 
