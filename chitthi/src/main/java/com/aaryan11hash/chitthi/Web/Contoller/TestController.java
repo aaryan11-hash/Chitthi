@@ -47,7 +47,7 @@ public class TestController {
 
     @PostMapping("/check3")
     public ResponseEntity<String> sendTestResponse3(){
-        template.convertAndSend(RabbitMqConfig.TEST_EXCHANGE,RabbitMqConfig.TEST_ROUTE3, BlobFileMessageEvent.builder().recipientName("sample").build());
+        template.convertAndSend(RabbitMqConfig.TEST_EXCHANGE,RabbitMqConfig.NOTIFICATION_EVENT_ROUTE, BlobFileMessageEvent.builder().recipientName("sample").build());
 
         return ResponseEntity.ok().body("DONE");
 
