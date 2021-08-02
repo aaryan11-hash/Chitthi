@@ -3,4 +3,4 @@
 
 # Chitthi
 A microservice based backend project that imitates a classic chat application
-![logo](https://chitthi-storage.s3.ap-south-1.amazonaws.com/final.jpg)
+![logo](https://hackrx.s3.ap-south-1.amazonaws.com/final+(1).jpg)
