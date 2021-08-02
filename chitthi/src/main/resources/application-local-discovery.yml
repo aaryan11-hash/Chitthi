@@ -1,7 +1,7 @@
 spring:
   cloud:
     discovery:
-      enabled: true
+      enabled: false
 
 eureka:
   instance:

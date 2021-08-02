@@ -1,4 +1,4 @@
-package com.aaryan11hash.chitthi.Config;
+package com.chitthi.authservice.config;
 
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -11,14 +11,14 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMqConfig {
 
-
     public static final String BLOB_PROCESS_QUEUE = "blob-process-queue";
     public static final String BLOB_PROCESS_QUEUE_OUTPUT = "blob-process-queue-output";
     public static final String NOTIFICATION_EVENT = "notification-event";
     public static final String TEST_EXCHANGE  ="test_exchange";
     public static final String BLOB_PROCESS_QUEUE_ROUTE = "blob-process-queue-route";
     public static final String BLOB_PROCESS_QUEUE_OUTPUT_ROUTE = "blob-process-queue-output-route";
-    public static final String NOTIFICATION_EVENT_ROUTE = "notification-event-route";
+    public static final String TEST_ROUTE3 = "notification-event-route";
+
 
     @Bean
     public Queue queue1(){
@@ -43,7 +43,7 @@ public class RabbitMqConfig {
 
 
     @Bean
-    public Binding bindingtest1(Queue queue1,TopicExchange topicExchange){
+    public Binding bindingtest1(Queue queue1, TopicExchange topicExchange){
 
         return BindingBuilder
                 .bind(queue1)
@@ -57,7 +57,7 @@ public class RabbitMqConfig {
         return BindingBuilder
                 .bind(queue2)
                 .to(topicExchange)
-                .with(BLOB_PROCESS_QUEUE_OUTPUT_ROUTE);
+                .with(BLOB_PROCESS_QUEUE_OUTPUT);
     }
 
     @Bean
@@ -66,7 +66,7 @@ public class RabbitMqConfig {
         return BindingBuilder
                 .bind(queue3)
                 .to(topicExchange)
-                .with(NOTIFICATION_EVENT_ROUTE);
+                .with(TEST_ROUTE3);
     }
 
     @Bean
