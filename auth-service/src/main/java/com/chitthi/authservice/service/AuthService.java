@@ -5,7 +5,9 @@ import com.chitthi.authservice.dto.AuthenticationResponse;
 import com.chitthi.authservice.dto.LoginRequest;
 import com.chitthi.authservice.dto.RefreshTokenRequest;
 import com.chitthi.authservice.dto.RegisterRequest;
+import com.chitthi.authservice.dto.cache.AuthResponseCache;
 import com.chitthi.authservice.model.VerificationToken;
+import com.chitthi.authservice.repository.AuthCacheDao;
 import com.chitthi.authservice.repository.VerificationTokenRepository;
 import com.chitthi.authservice.security.JwtProvider;
 import com.chitthi.authservice.exceptions.SpringChitthiException;
@@ -13,6 +15,7 @@ import com.chitthi.authservice.model.NotificationEmail;
 import com.chitthi.authservice.model.User;
 import com.chitthi.authservice.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -30,6 +33,7 @@ import java.util.UUID;
 @Service
 @AllArgsConstructor
 @Transactional
+@Slf4j
 public class AuthService {
 
     private final PasswordEncoder passwordEncoder;
@@ -40,6 +44,7 @@ public class AuthService {
     private final JwtProvider jwtProvider;
     private final RefreshTokenService refreshTokenService;
     private final RabbitMqPublisher rabbitMqPublisher;
+    private final AuthCacheDao authCacheDao;
 
     public void signup(RegisterRequest registerRequest) {
         User user = new User();
@@ -53,10 +58,13 @@ public class AuthService {
 
         String token = generateVerificationToken(user);
         System.out.println(token);
+
+
         rabbitMqPublisher.userSignUpMailEvent(new NotificationEmail("Please Activate your Account",
                 user.getEmail(), "Thank you for signing up to Spring Reddit, " +
                 "please click on the below url to activate your account : " +
                 "http://localhost:8080/api/auth/accountVerification/" + token));
+
 
     }
 
@@ -97,10 +105,15 @@ public class AuthService {
         SecurityContextHolder.getContext().setAuthentication(authenticate);
 
         String token = jwtProvider.generateToken(authenticate);
+        String refreshToken = refreshTokenService.generateRefreshToken().getToken();
+
+        AuthResponseCache cache = AuthResponseCache.builder().authenticationToken(token).username(loginRequest.getUsername()).expiresAt(Instant.now().plusMillis(jwtProvider.getJwtExpirationInMillis())).refreshToken(refreshToken).build();
+        authCacheDao.saveToken(cache);
+        log.info( "AUTH TOKEN SAVED: "+authCacheDao.findTokenById(loginRequest.getUsername()).toString());
 
         return AuthenticationResponse.builder()
                 .authenticationToken(token)
-                .refreshToken(refreshTokenService.generateRefreshToken().getToken())
+                .refreshToken(refreshToken)
                 .expiresAt(Instant.now().plusMillis(jwtProvider.getJwtExpirationInMillis()))
                 .username(loginRequest.getUsername())
                 .build();

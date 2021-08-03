@@ -5,7 +5,11 @@ services:
     container_name: rashish
     ports:
       - 6379:6379
-
+  rediscache:
+    image: redis
+    container_name: cache
+    ports:
+      - 6380:6380
   rabbitmq:
     image: jorgeacetozi/rabbitmq-stomp:3.6
     container_name: rabbitmq-stomp2

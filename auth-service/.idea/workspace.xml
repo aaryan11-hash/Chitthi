@@ -23,65 +23,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12cc9d3f-e642-4093-8aba-544913695d0c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/RabbitQueueService/RabbitMqPublisher.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/RabbitQueueService/RabbitMqPublisherImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/config/RabbitMqConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/service/MailService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/config/RedisCacheConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/dto/cache/AuthResponseCache.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/repository/AuthCacheDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/SpringRedditCloneApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/SpringRedditCloneApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/config/SwaggerConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/config/SwaggerConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/config/WebConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/controller/CommentsController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/controller/PostController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/controller/SubredditController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/controller/VoteController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/dto/AuthenticationResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/dto/AuthenticationResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/dto/CommentsDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/dto/LoginRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/dto/LoginRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/dto/LogoutRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/dto/LogoutRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/dto/PostRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/dto/PostResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/dto/RefreshTokenRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/dto/RefreshTokenRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/dto/RegisterRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/dto/RegisterRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/dto/SubredditDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/dto/VoteDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/exceptions/PostNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/exceptions/PostNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/exceptions/SpringRedditException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/exceptions/SpringChitthiException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/exceptions/SubredditNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/exceptions/ChitthiNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/mapper/CommentMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/mapper/PostMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/mapper/SubredditMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/model/Comment.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/model/NotificationEmail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/model/NotificationEmail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/model/Post.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/model/RefreshToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/model/RefreshToken.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/model/Subreddit.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/model/VerificationToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/model/VerificationToken.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/model/Vote.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/model/VoteType.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/repository/CommentRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/repository/PostRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/repository/RefreshTokenRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/repository/RefreshTokenRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/repository/SubredditRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/repository/VerificationTokenRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/repository/VerificationTokenRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/repository/VoteRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/security/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/security/JwtAuthenticationFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/security/JwtProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/security/JwtProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/service/AuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/service/CommentService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/service/MailContentBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/service/MailContentBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/service/MailService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/service/PostService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/service/RefreshTokenService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/service/RefreshTokenService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/service/SubredditService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/service/UserDetailsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/service/UserDetailsServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/programming/techie/springredditclone/service/VoteService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/programming/techie/springredditclone/SpringRedditCloneApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/chitthi/authservice/SpringRedditCloneApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/service/AuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/service/RefreshTokenService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/service/RefreshTokenService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chat-service/Docker/Compose/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../chat-service/Docker/Compose/docker-compose.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,8 +41,15 @@
   <component name="CodeStyleSettingsInfer">
     <option name="done" value="true" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="KubernetesApiPersistence">
     <option name="context" value="docker-desktop" />
@@ -109,6 +66,7 @@
     <option name="version" value="1" />
   </component>
   <component name="ProjectId" id="1w7NgSMBLNtbTHtqFeuszdW0s4Q" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -180,6 +138,9 @@
       <workItem from="1627901780787" duration="2077000" />
       <workItem from="1627903920009" duration="1558000" />
       <workItem from="1627905527524" duration="553000" />
+      <workItem from="1627965602153" duration="24000" />
+      <workItem from="1627965647706" duration="4124000" />
+      <workItem from="1627969960489" duration="633000" />
     </task>
     <servers />
   </component>
@@ -211,42 +172,46 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="499" y="179" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.864@0.0.1536.864" timestamp="1627905085077" />
-    <state x="549" y="187" key="FileChooserDialogImpl" timestamp="1627884338813">
+    <state x="549" y="187" key="FileChooserDialogImpl" timestamp="1627965625319">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="549" y="187" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1627884338813" />
-    <state width="1493" height="328" key="GridCell.Tab.0.bottom" timestamp="1627906085224">
+    <state x="549" y="187" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1627965625319" />
+    <state width="1493" height="369" key="GridCell.Tab.0.bottom" timestamp="1627970652938">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="328" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1627906085224" />
-    <state width="1493" height="328" key="GridCell.Tab.0.center" timestamp="1627906085224">
+    <state width="1493" height="369" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1627970652938" />
+    <state width="1493" height="369" key="GridCell.Tab.0.center" timestamp="1627970652936">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="328" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1627906085224" />
-    <state width="1493" height="328" key="GridCell.Tab.0.left" timestamp="1627906085224">
+    <state width="1493" height="369" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1627970652936" />
+    <state width="1493" height="369" key="GridCell.Tab.0.left" timestamp="1627970652935">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="328" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1627906085224" />
-    <state width="1493" height="328" key="GridCell.Tab.0.right" timestamp="1627906085224">
+    <state width="1493" height="369" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1627970652935" />
+    <state width="1493" height="369" key="GridCell.Tab.0.right" timestamp="1627970652937">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="328" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1627906085224" />
-    <state width="1493" height="328" key="GridCell.Tab.1.bottom" timestamp="1627906085240">
+    <state width="1493" height="369" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1627970652937" />
+    <state width="1493" height="369" key="GridCell.Tab.1.bottom" timestamp="1627970652941">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="328" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1627906085240" />
-    <state width="1493" height="328" key="GridCell.Tab.1.center" timestamp="1627906085240">
+    <state width="1493" height="369" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1627970652941" />
+    <state width="1493" height="369" key="GridCell.Tab.1.center" timestamp="1627970652940">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="328" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1627906085240" />
-    <state width="1493" height="328" key="GridCell.Tab.1.left" timestamp="1627906085240">
+    <state width="1493" height="369" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1627970652940" />
+    <state width="1493" height="369" key="GridCell.Tab.1.left" timestamp="1627970652939">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="328" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1627906085240" />
-    <state width="1493" height="328" key="GridCell.Tab.1.right" timestamp="1627906085240">
+    <state width="1493" height="369" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1627970652939" />
+    <state width="1493" height="369" key="GridCell.Tab.1.right" timestamp="1627970652940">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="328" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1627906085240" />
+    <state width="1493" height="369" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1627970652940" />
+    <state x="94" y="100" width="581" height="670" key="dock-window-1" timestamp="1627967202613">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="94" y="100" width="581" height="670" key="dock-window-1/0.0.1536.864@0.0.1536.864" timestamp="1627967202613" />
     <state x="46" y="185" width="672" height="678" key="search.everywhere.popup" timestamp="1627904134540">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
