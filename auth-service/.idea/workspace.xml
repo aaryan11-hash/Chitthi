@@ -23,15 +23,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="12cc9d3f-e642-4093-8aba-544913695d0c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/config/RedisCacheConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/dto/cache/AuthResponseCache.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/repository/AuthCacheDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chat-service/src/main/java/com/aaryan11hash/chatservice/Config/RedisCacheConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chat-service/src/main/java/com/aaryan11hash/chatservice/Repositories/AuthCacheDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../chat-service/src/main/java/com/chitthi/authservice/dto/cache/AuthResponseCache.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/service/AuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/service/RefreshTokenService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/service/RefreshTokenService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../chat-service/Docker/Compose/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../chat-service/Docker/Compose/docker-compose.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/chitthi/authservice/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chat-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../chat-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chat-service/src/main/java/com/aaryan11hash/chatservice/Web/Controller/TestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../chat-service/src/main/java/com/aaryan11hash/chatservice/Web/Controller/TestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../chat-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../chat-service/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +79,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="go.import.settings.migrated" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../chat-service" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -140,7 +139,8 @@
       <workItem from="1627905527524" duration="553000" />
       <workItem from="1627965602153" duration="24000" />
       <workItem from="1627965647706" duration="4124000" />
-      <workItem from="1627969960489" duration="633000" />
+      <workItem from="1627969960489" duration="2192000" />
+      <workItem from="1627984300309" duration="2588000" />
     </task>
     <servers />
   </component>
@@ -172,49 +172,53 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="499" y="179" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.864@0.0.1536.864" timestamp="1627905085077" />
-    <state x="549" y="187" key="FileChooserDialogImpl" timestamp="1627965625319">
+    <state x="549" y="187" key="FileChooserDialogImpl" timestamp="1627984321075">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="549" y="187" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1627965625319" />
-    <state width="1493" height="369" key="GridCell.Tab.0.bottom" timestamp="1627970652938">
+    <state x="549" y="187" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1627984321075" />
+    <state width="723" height="421" key="GridCell.Tab.0.bottom" timestamp="1627987283608">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="369" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1627970652938" />
-    <state width="1493" height="369" key="GridCell.Tab.0.center" timestamp="1627970652936">
+    <state width="723" height="421" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1627987283608" />
+    <state width="723" height="421" key="GridCell.Tab.0.center" timestamp="1627987283608">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="369" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1627970652936" />
-    <state width="1493" height="369" key="GridCell.Tab.0.left" timestamp="1627970652935">
+    <state width="723" height="421" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1627987283608" />
+    <state width="723" height="421" key="GridCell.Tab.0.left" timestamp="1627987283608">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="369" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1627970652935" />
-    <state width="1493" height="369" key="GridCell.Tab.0.right" timestamp="1627970652937">
+    <state width="723" height="421" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1627987283608" />
+    <state width="723" height="421" key="GridCell.Tab.0.right" timestamp="1627987283608">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="369" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1627970652937" />
-    <state width="1493" height="369" key="GridCell.Tab.1.bottom" timestamp="1627970652941">
+    <state width="723" height="421" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1627987283608" />
+    <state width="723" height="421" key="GridCell.Tab.1.bottom" timestamp="1627987283608">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="369" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1627970652941" />
-    <state width="1493" height="369" key="GridCell.Tab.1.center" timestamp="1627970652940">
+    <state width="723" height="421" key="GridCell.Tab.1.bottom/0.0.1536.864@0.0.1536.864" timestamp="1627987283608" />
+    <state width="723" height="421" key="GridCell.Tab.1.center" timestamp="1627987283608">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="369" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1627970652940" />
-    <state width="1493" height="369" key="GridCell.Tab.1.left" timestamp="1627970652939">
+    <state width="723" height="421" key="GridCell.Tab.1.center/0.0.1536.864@0.0.1536.864" timestamp="1627987283608" />
+    <state width="723" height="421" key="GridCell.Tab.1.left" timestamp="1627987283608">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="369" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1627970652939" />
-    <state width="1493" height="369" key="GridCell.Tab.1.right" timestamp="1627970652940">
+    <state width="723" height="421" key="GridCell.Tab.1.left/0.0.1536.864@0.0.1536.864" timestamp="1627987283608" />
+    <state width="723" height="421" key="GridCell.Tab.1.right" timestamp="1627987283608">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="369" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1627970652940" />
+    <state width="723" height="421" key="GridCell.Tab.1.right/0.0.1536.864@0.0.1536.864" timestamp="1627987283608" />
     <state x="94" y="100" width="581" height="670" key="dock-window-1" timestamp="1627967202613">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="94" y="100" width="581" height="670" key="dock-window-1/0.0.1536.864@0.0.1536.864" timestamp="1627967202613" />
-    <state x="46" y="185" width="672" height="678" key="search.everywhere.popup" timestamp="1627904134540">
+    <state x="425" y="197" key="run.anything.popup" timestamp="1627985714027">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="46" y="185" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1627904134540" />
+    <state x="425" y="197" key="run.anything.popup/0.0.1536.864@0.0.1536.864" timestamp="1627985714027" />
+    <state x="46" y="185" width="672" height="678" key="search.everywhere.popup" timestamp="1627984963549">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="46" y="185" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1627984963549" />
   </component>
 </project>
