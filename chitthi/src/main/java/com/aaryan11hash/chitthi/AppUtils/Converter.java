@@ -1,11 +1,11 @@
 package com.aaryan11hash.chitthi.AppUtils;
 
 
-import com.aaryan11hash.chitthi.Events.Models.BlobFileMessageEvent;
-import com.aaryan11hash.chitthi.Events.Models.ChatMessageEvent;
-import com.aaryan11hash.chitthi.Web.Domain.BlobFileMessage;
-import com.aaryan11hash.chitthi.Web.Domain.ChatMessage;
-import com.aaryan11hash.chitthi.Web.Model.BlobFileMessageDto;
+import com.aaryan11hash.chitthi.Events.models.BlobFileMessageEvent;
+import com.aaryan11hash.chitthi.Events.models.ChatMessageEvent;
+import com.aaryan11hash.chitthi.Web.domain.BlobFileMessage;
+import com.aaryan11hash.chitthi.Web.domain.ChatMessage;
+import com.aaryan11hash.chitthi.Web.model.BlobFileMessageDto;
 
 public class Converter {
 

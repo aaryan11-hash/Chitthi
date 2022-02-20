@@ -14,7 +14,9 @@ router.get('/:senderId/:recipientId/count', async (req, res) =>{
 
     const count = await chatMessageDAO.countNewMessages(req.params.senderId,req.params.recipientId);
 
-    return res.send(count);
+    count.then(data => res.send(data))
+         .catch(err => res.status(404,{msg:'error'}));
+            
 });
 
 router.get('/:senderId/:recipientId', async (req, res)=>{

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class RabbitMqPublisherImpl implements RabbitMqPublisher{
+public class RabbitMqPublisherImpl{
 
     private final RabbitTemplate rabbitTemplate;
 

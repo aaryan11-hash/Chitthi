@@ -32,8 +32,8 @@ public class ChatMessageService {
     public ChatMessage save(ChatMessage chatMessage) {
 
         chatMessage.setStatus(MessageStatus.RECEIVED);
-        chatMessageRepository.save(chatMessage);
-        return chatMessage;
+
+        return chatMessageRepository.save(chatMessage);
 
     }
 

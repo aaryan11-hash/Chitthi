@@ -1,10 +1,155 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0e884d2f-10ba-43b8-ab65-e512d4d85067" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/Config/RabbitMqConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/Config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/Config/WebConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/Events/RabbitMq/RabbitMqPublisher.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/Events/RabbitMq/RabbitMqPublisherImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/controller/AuthController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/dto/AuthenticationResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/dto/LoginRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/dto/LogoutRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/dto/RefreshTokenRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/dto/RegisterRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/exceptions/PostNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/exceptions/SpringRedditException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/exceptions/SubredditNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/model/NotificationEmail.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/model/RefreshToken.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/model/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/model/VerificationToken.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/repository/RefreshTokenRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/repository/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/repository/VerificationTokenRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/security/JwtAuthenticationFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/security/JwtProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/service/AuthService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/service/MailService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/service/RefreshTokenService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/service/UserDetailsServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/resources/springblog.jks" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/AuthServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/AuthServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/Config/JwtConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/Config/JwtTokenAuthenticationFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/Config/SecurityCredentialsConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/Exception/BadRequestException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/Exception/EmailAlreadyExistsException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/Exception/InternalServerException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/Exception/ResourceNotFoundException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/Exception/UsernameAlreadyExistsException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/Repositories/UserRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/Web/Controllers/AuthEndpointController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/Web/Controllers/UserEndpointController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/Web/Services/JwtTokenProvider.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/Web/Services/UserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/Web/model/Address.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/Web/model/InstaUserDetails.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/Web/model/Profile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/Web/model/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Web/model/NotificationEmail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/Web/model/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/Web/model/facebook/FacebookPicture.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/Web/model/facebook/FacebookUser.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/Web/model/facebook/PictureData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/Web/payload/ApiResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/Web/payload/FacebookLoginRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/Web/payload/JwtAuthenticationResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/Web/payload/LoginRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/Web/payload/SignUpRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/aaryan11hash/authservice/Web/payload/UserSummary.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/AppUtils/Converter.java" beforeDir="false" afterPath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/AppUtils/Converter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/BootStrap/BootStrapRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/BootStrap/BootStrapRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Config/AsyncConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Config/AsyncConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Config/RabbitMqConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Config/RabbitMqConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Events/Models/BlobFileMessageEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Events/models/BlobFileMessageEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Events/Models/ChatMessageEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Events/models/ChatMessageEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Events/Models/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Events/models/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Events/Models/NotificationType.java" beforeDir="false" afterPath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Events/models/NotificationType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Events/Models/TestMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Events/models/TestMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Events/RabbitQueueService/RabbitMqListner.java" beforeDir="false" afterPath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Events/RabbitQueueService/RabbitMqListner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Events/RabbitQueueService/RabbitMqPublisherImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Events/RabbitQueueService/RabbitMqPublisherImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Repositories/TestDomainRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/repositories/TestDomainRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Services/BlobStorageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/services/BlobStorageService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Services/MailingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/services/MailingService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Web/Contoller/TestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Web/Contoller/TestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Web/Domain/BlobFileMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Web/domain/BlobFileMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Web/Domain/ChatMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Web/domain/ChatMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Web/Domain/ChatNotification.java" beforeDir="false" afterPath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Web/domain/ChatNotification.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Web/Domain/ChatRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Web/domain/ChatRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Web/Domain/TestDomain.java" beforeDir="false" afterPath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Web/domain/TestDomain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Web/Enums/MessageStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Web/Enum/MessageStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Web/Model/BlobFileMessageDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Web/model/BlobFileMessageDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Web/Model/ChatMessageDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Web/model/ChatMessageDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Web/Model/ChatNotificationDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Web/model/ChatNotificationDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Web/Model/ChatRoomDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/chitthi/src/main/java/com/aaryan11hash/chitthi/Web/model/ChatRoomDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chitthi/src/main/resources/application-local-discovery.yml" beforeDir="false" afterPath="$PROJECT_DIR$/chitthi/src/main/resources/application-local-discovery.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/update-service/Controller/ChatRestController.js" beforeDir="false" afterPath="$PROJECT_DIR$/update-service/Controller/ChatRestController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/update-service/Domain/ChatMessage.js" beforeDir="false" afterPath="$PROJECT_DIR$/update-service/Domain/ChatMessage.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="KubernetesApiPersistence">
+    <option name="context" value="docker-desktop" />
+    <option name="namespace" value="default" />
+  </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
         <option name="mavenHome" value="D:\Software\IntelliJ IDEA 2020.2.3\plugins\maven\lib\maven3" />
       </MavenGeneralSettings>
     </option>
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="1w2RdFQonVAFSlb1WMkcaaSbEgZ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="go.import.settings.migrated" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../coronaUtility.service" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0e884d2f-10ba-43b8-ab65-e512d4d85067" name="Default Changelist" comment="" />
+      <created>1627654782726</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1627654782726</updated>
+      <workItem from="1627654783856" duration="847000" />
+      <workItem from="1627666030903" duration="62000" />
+      <workItem from="1627889314594" duration="43000" />
+      <workItem from="1644916536579" duration="15000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>

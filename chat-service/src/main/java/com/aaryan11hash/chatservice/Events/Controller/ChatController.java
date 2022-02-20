@@ -28,6 +28,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.annotation.SubscribeMapping;
 import org.springframework.stereotype.Controller;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 
 @Slf4j
@@ -49,25 +50,27 @@ public class ChatController {
 
     @SneakyThrows
     @MessageMapping("/chat/simple-text")
-    public void processMessage(@Payload ChatMessageEvent chatMessageEvent){
+    @SendTo("/topic/simpleText")
+    public ChatMessage processMessage(@Payload ChatMessageEvent chatMessageEvent){
 
-        inputOutputExec.execute(()->{
+        System.out.println(chatMessageEvent);
+
+       return CompletableFuture.supplyAsync(()->{
 
             var chatId = chatRoomService
                     .getChatId(chatMessageEvent.getSenderId(), chatMessageEvent.getRecipientId(), true);
             chatMessageEvent.setChatId(chatId.get());
 
-            chatMessageService.save(Converter.chatMessageEventToDomain(chatMessageEvent));
+           return chatMessageService.save(Converter.chatMessageEventToDomain(chatMessageEvent));
 
-            try {
-                redisChatMessagePublisher.publish(new ObjectMapper().writeValueAsString(MessagingEvent.builder().chatMessageEvent(chatMessageEvent).build()));
-            } catch (JsonProcessingException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                redisChatMessagePublisher.publish(new ObjectMapper().writeValueAsString(MessagingEvent.builder().chatMessageEvent(chatMessageEvent).build()));
+//            } catch (JsonProcessingException e) {
+//                e.printStackTrace();
+//            }
+//
 
-        });
-
-
+        }).join();
 
     }
 
@@ -104,9 +107,11 @@ public class ChatController {
 
     @SneakyThrows
     @MessageMapping("/test")
-    public void testEndPoint(@Payload BlobFileMessageEvent event){
+    @SendTo("/topic/test")
+    public BlobFileMessageEvent testEndPoint(@Payload BlobFileMessageEvent event){
         log.info(event.toString());
-        redisChatMessagePublisher.publish(new ObjectMapper().writeValueAsString(MessagingEvent.builder().blobFileMessageEvent(event).build()));
+        //redisChatMessagePublisher.publish(new ObjectMapper().writeValueAsString(MessagingEvent.builder().blobFileMessageEvent(event).build()));
+        return event;
     }
 
 

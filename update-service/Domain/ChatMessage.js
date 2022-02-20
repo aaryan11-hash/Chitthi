@@ -38,6 +38,7 @@ module.exports = {
             return chatMessage;
         });
 
+        return count;
     },
 
     findChatMessages : async function(senderId , recipientId){
@@ -65,16 +66,18 @@ module.exports = {
             if(err)
                 throw err;
             
-            if(data !== undefined)
+            else if(data !== undefined)
                 this.updateSatus(id,undefined,undefined,'DELIVERED');
             
+            return chatMessages;
         });
 
+        return chatMessages;
     },
 
     updateSatus : async function(id,senderId, recipientId, messageSatus){
         
-        if(id === undefined){
+        if(id == undefined){
             ChatMessage.where({senderId : senderId, recipientId : recipientId})
                    .update({status : messageSatus});
         }else{
@@ -84,4 +87,4 @@ module.exports = {
     }
 
 
-}
+};

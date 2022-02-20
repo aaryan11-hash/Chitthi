@@ -1,5 +1,6 @@
 package com.aaryan11hash.chatservice.Config;
 
+import com.aaryan11hash.chatservice.BootStrap.MyStompSessionHandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -43,14 +44,20 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry
                 .addEndpoint("/register-socket")
+                .addInterceptors(new MyStompSessionHandler())
                 .setAllowedOriginPatterns()
                 .withSockJS();
 
+
+
         registry
                 .addEndpoint("/register")
-        .setAllowedOriginPatterns();
+                .addInterceptors(new MyStompSessionHandler());
+
 
     }
+
+
 
     @Override
     public boolean configureMessageConverters(List<MessageConverter> messageConverters) {

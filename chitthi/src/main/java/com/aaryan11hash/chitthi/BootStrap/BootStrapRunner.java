@@ -1,13 +1,9 @@
 package com.aaryan11hash.chitthi.BootStrap;
 
-import com.aaryan11hash.chitthi.Repositories.TestDomainRepository;
-import com.aaryan11hash.chitthi.Web.Domain.TestDomain;
+import com.aaryan11hash.chitthi.repositories.TestDomainRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
-import reactor.core.publisher.Flux;
-
-import java.util.List;
 
 
 @RequiredArgsConstructor

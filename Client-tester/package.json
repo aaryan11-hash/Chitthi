@@ -14,7 +14,7 @@
     "express": "^4.17.1",
     "JSON": "^1.0.0",
     "mongoose": "^5.13.3",
-    "nodemon": "^2.0.9",
+    "nodemon": "^2.0.15",
     "sockjs-client": "^1.5.1",
     "stomp": "^0.1.1",
     "stompjs": "^2.3.3",

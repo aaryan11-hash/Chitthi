@@ -8,6 +8,7 @@ import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+
 @Configuration
 public class RabbitMqConfig {
 
@@ -18,7 +19,7 @@ public class RabbitMqConfig {
     public static final String TEST_EXCHANGE  ="test_exchange";
     public static final String BLOB_PROCESS_QUEUE_ROUTE = "blob-process-queue-route";
     public static final String BLOB_PROCESS_QUEUE_OUTPUT_ROUTE = "blob-process-queue-output-route";
-    public static final String TEST_ROUTE3 = "test-route3";
+    public static final String NOTIFICATION_EVENT_ROUTE = "notification-event-route";
 
     @Bean
     public Queue queue1(){
@@ -66,7 +67,7 @@ public class RabbitMqConfig {
         return BindingBuilder
                 .bind(queue3)
                 .to(topicExchange)
-                .with(TEST_ROUTE3);
+                .with(NOTIFICATION_EVENT_ROUTE);
     }
 
     @Bean

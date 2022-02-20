@@ -5,11 +5,12 @@ import com.aaryan11hash.chatservice.Events.Models.ChatMessageEvent;
 import com.aaryan11hash.chatservice.Web.Domain.BlobFileMessage;
 import com.aaryan11hash.chatservice.Web.Domain.ChatMessage;
 import com.aaryan11hash.chatservice.Web.Model.BlobFileMessageDto;
+import com.aaryan11hash.chatservice.Web.Model.ChatMessageDto;
 
 public class Converter {
 
 
-    public static BlobFileMessageEvent blobFileModelToEvent(BlobFileMessageDto blobFileMessageDto){
+    public static BlobFileMessageEvent blobFileModelToEvent(BlobFileMessageDto blobFileMessageDto) {
 
         return BlobFileMessageEvent.builder()
                 .id(blobFileMessageDto.getId())
@@ -24,9 +25,9 @@ public class Converter {
                 .build();
     }
 
-    public static BlobFileMessageDto blobFileMessageEventToModel(BlobFileMessageEvent blobFileMessageEvent){
+    public static BlobFileMessageDto blobFileMessageEventToModel(BlobFileMessageEvent blobFileMessageEvent) {
 
-        return  BlobFileMessageDto.builder()
+        return BlobFileMessageDto.builder()
                 .id(blobFileMessageEvent.getId())
                 .chatId(blobFileMessageEvent.getChatId())
                 .blob(blobFileMessageEvent.getBlob())
@@ -40,8 +41,8 @@ public class Converter {
     }
 
 
-    public static BlobFileMessage blobFileMessageEventToDomain(BlobFileMessageEvent blobFileMessageEvent,String blobFileUrl){
-        return  BlobFileMessage.builder()
+    public static BlobFileMessage blobFileMessageEventToDomain(BlobFileMessageEvent blobFileMessageEvent, String blobFileUrl) {
+        return BlobFileMessage.builder()
                 .id(blobFileMessageEvent.getId())
                 .chatId(blobFileMessageEvent.getChatId())
                 .recipientId(blobFileMessageEvent.getRecipientId())
@@ -54,9 +55,9 @@ public class Converter {
                 .build();
     }
 
-    public static ChatMessage chatMessageEventToDomain(ChatMessageEvent chatMessageEvent){
+    public static ChatMessage chatMessageEventToDomain(ChatMessageEvent chatMessageEvent) {
 
-        return  ChatMessage.builder()
+        return ChatMessage.builder()
                 .id(chatMessageEvent.getId())
                 .chatId(chatMessageEvent.getChatId())
                 .recipientId(chatMessageEvent.getRecipientId())
@@ -68,4 +69,18 @@ public class Converter {
                 .build();
     }
 
+    public static ChatMessageEvent chatMessageDomainToEvent(ChatMessage chatMessage) {
+
+        return ChatMessageEvent.builder()
+                .id(chatMessage.getId())
+                .chatId(chatMessage.getChatId())
+                .recipientId(chatMessage.getRecipientId())
+                .recipientName(chatMessage.getRecipientName())
+                .senderName(chatMessage.getSenderName())
+                .senderId(chatMessage.getSenderId())
+                .status(chatMessage.getStatus())
+                .timestamp(chatMessage.getTimestamp())
+                .build();
+
+    }
 }
