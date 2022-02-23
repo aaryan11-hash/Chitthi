@@ -19,6 +19,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @RestController
 @RequiredArgsConstructor
@@ -35,11 +36,11 @@ public class ChatRestController {
     private final TestDomainRepository testDomainRepository;
 
     @GetMapping("/messages/{senderId}/{recipientId}/count")
-    public Mono<ResponseEntity<Long>> countNewMessages(
+    public ResponseEntity<Long> countNewMessages(
             @PathVariable String senderId,
             @PathVariable String recipientId) {
 
-        return Mono.just(ResponseEntity.ok(chatMessageService.countNewMessages(senderId, recipientId)));
+        return CompletableFuture.supplyAsync(() -> ResponseEntity.ok(chatMessageService.countNewMessages(senderId, recipientId))).join();
     }
 
     @GetMapping("/messages/{senderId}/{recipientId}")

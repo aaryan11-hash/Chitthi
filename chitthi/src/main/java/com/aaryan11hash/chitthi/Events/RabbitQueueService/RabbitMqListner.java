@@ -36,6 +36,7 @@ public class RabbitMqListner {
 
     @RabbitListener(queues = RabbitMqConfig.NOTIFICATION_EVENT)
     public void listen3(NotificationEmail notificationEmail){
+
         log.info("at QUEUE3: "+ notificationEmail);
     }
 }

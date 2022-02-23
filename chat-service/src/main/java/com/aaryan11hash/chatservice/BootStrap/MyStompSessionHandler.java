@@ -8,6 +8,7 @@ import org.springframework.messaging.simp.stomp.StompHeaders;
 import org.springframework.messaging.simp.stomp.StompSession;
 import org.springframework.messaging.simp.stomp.StompSessionHandlerAdapter;
 import org.springframework.web.socket.WebSocketHandler;
+import org.springframework.web.socket.server.HandshakeHandler;
 import org.springframework.web.socket.server.HandshakeInterceptor;
 
 import javax.servlet.http.HttpSession;
@@ -20,6 +21,8 @@ public class MyStompSessionHandler implements HandshakeInterceptor {
 //
 //
 //    }
+
+
 
     @Override
     public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler,
@@ -65,4 +68,7 @@ public class MyStompSessionHandler implements HandshakeInterceptor {
         System.out.println();
         System.out.println(webSocketHandler.toString());
     }
+
+
+
 }

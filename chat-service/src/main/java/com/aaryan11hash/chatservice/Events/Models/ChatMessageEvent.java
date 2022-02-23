@@ -3,6 +3,7 @@ package com.aaryan11hash.chatservice.Events.Models;
 
 import com.aaryan11hash.chatservice.Web.Enums.MessageStatus;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,6 +29,9 @@ public class ChatMessageEvent {
     private String content;
     private Date timestamp;
     private MessageStatus status;
+
+    @JsonProperty(value = "uniConnectionId")
+    private String uniConnectionId;
 }
 
 

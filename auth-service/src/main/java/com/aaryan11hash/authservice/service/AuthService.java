@@ -52,7 +52,7 @@ public class AuthService {
         userRepository.save(user);
 
         String token = generateVerificationToken(user);
-
+        System.out.println("TOKEN ===============>"+token);
         rabbitMqPublisher.publishForEmailVerification(new NotificationEmail("Please Activate your Account",
                 user.getEmail(), "Thank you for signing up to Spring Reddit, " +
                 "please click on the below url to activate your account : " +

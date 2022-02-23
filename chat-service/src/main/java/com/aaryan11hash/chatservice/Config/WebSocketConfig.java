@@ -23,8 +23,6 @@ import java.util.List;
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
 
-
-
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
 
@@ -34,7 +32,9 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
                 .setRelayHost("localhost")
                 .setRelayPort(61613)
                 .setClientLogin("guest")
-                .setClientPasscode("guest");
+                .setClientPasscode("guest")
+                .setSystemHeartbeatSendInterval(10000)
+                .setSystemHeartbeatReceiveInterval(10000);
 
 
 
@@ -44,15 +44,15 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry
                 .addEndpoint("/register-socket")
-                .addInterceptors(new MyStompSessionHandler())
-                .setAllowedOriginPatterns()
+                .setAllowedOrigins("http://localhost:3000")
+                //.addInterceptors(new MyStompSessionHandler())
                 .withSockJS();
 
 
 
         registry
-                .addEndpoint("/register")
-                .addInterceptors(new MyStompSessionHandler());
+                .addEndpoint("/register");
+                //.addInterceptors(new MyStompSessionHandler());
 
 
     }

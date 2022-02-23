@@ -29,8 +29,12 @@ const connect = () =>{
 
 };
 
+const sendChatRegistry = () => {
+    stompClient.send('/app/chat/registry',{}, JSON.stringify({userName : 'ss8', email : 'ss8@gmail.com', clientIp:'IP',city:'Pune',continent:'ASIA',country:'INDIA',latitude:'LAT',longitude:'LONG',pincode:'411060',state:'MAHARASHTRA',spring_boot_app_IP:'localhost'}));
+}
+
 const sendMessage = () => {
-    stompClient.send('/app/chat/simple-text',{},JSON.stringify({"id":null,"chatId":null,"senderId":"aaryan_11_","recipientId":"sanket_12","senderName":"aaryan","recipientName":"sanket","content":null}));
+    stompClient.send('/app/chat/simple-text',{},JSON.stringify({id:null,chatId:null,senderId: 'ss8@gmail.com',recipientId:'ss9@gmail.com',senderName:'ss8',recipientName:'ss9',content:'hello there!!!!',uniConnectionId : "ss9@gmail.comss9"}));
 };
 
 const sentTestMessage = () =>{
@@ -41,9 +45,12 @@ const onConnected = () => {
     console.log("connected");
     
     stompClient.subscribe(
-         '/topic/simpleText',
+         '/queue/'+'aaryan@112@gmail.com_chatMessage',
         onMessageReceived
       );
+
+    sendChatRegistry();
+    sendMessage();
 
 };
 
@@ -62,6 +69,6 @@ connect();
 setTimeout(()=>{
         
     //sentTestMessage();
-    sendMessage();
+    
 },3000);
 

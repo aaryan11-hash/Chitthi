@@ -4,6 +4,7 @@
   "description": "tester",
   "main": "index.js",
   "scripts": {
+    "execute": "nodemon index2.js",
     "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

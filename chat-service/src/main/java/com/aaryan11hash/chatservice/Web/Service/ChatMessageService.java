@@ -22,16 +22,15 @@ import java.util.List;
 public class ChatMessageService {
 
     @Autowired
-    private ChatMessageRepository chatMessageRepository;
+    private static ChatMessageRepository chatMessageRepository;
 
     @Autowired
     private ChatRoomService chatRoomService;
     @Autowired
     private MongoOperations mongoOperations;
 
-    public ChatMessage save(ChatMessage chatMessage) {
 
-        chatMessage.setStatus(MessageStatus.RECEIVED);
+    public ChatMessage save(ChatMessage chatMessage) {
 
         return chatMessageRepository.save(chatMessage);
 
